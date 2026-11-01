@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Standard Version](https://semver.org/) for commit guidelines.
 
+## 1.0.2
+
+- Fixed pub.dev README image rendering using absolute public raw media URLs.
+
 ## 1.0.1
 
 - Added animated video preview demo and asset showcases in documentation.
