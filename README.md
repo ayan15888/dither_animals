@@ -8,11 +8,11 @@
 Cute animated dithered (stipple, halftone, and ordered-dither) animal widgets for Flutter.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ayan15888/dither_animals/main/doc/preview.gif" alt="dither_animals animated demo" width="680" style="max-width: 100%; border-radius: 12px;"/>
+  <img src="doc/preview.gif" alt="dither_animals animated demo" width="680" style="max-width: 100%; border-radius: 12px;"/>
 </p>
 
 <p align="center">
-  <sub>🎬 <i>Watch the full high-definition video demo: <a href="https://github.com/ayan15888/dither_animals/raw/main/doc/things10.mp4"><b>things10.mp4</b></a></i></sub>
+  <sub>🎬 <i>Watch the full high-definition video demo: <a href="doc/things10.mp4"><b>things10.mp4</b></a></i></sub>
 </p>
 
 Rendered entirely on the Flutter `Canvas` using an **ordered 8×8 Bayer dithering matrix**, each animal features its own handcrafted animation curves, unique entrance/reveal transitions, facial expressions, idle breathing/swaying, and interactive poke physics with haptic feedback.
