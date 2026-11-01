@@ -1,9 +1,9 @@
 name: dither_animals
 description: Animated dithered (stipple and halftone) animal widgets for Flutter with 30 cute chibi animals, ordered dithering, and ripple poke physics.
 version: 1.0.0
-homepage: https://github.com/flutter_community/dither_animals
-repository: https://github.com/flutter_community/dither_animals
-issue_tracker: https://github.com/flutter_community/dither_animals/issues
+homepage: https://github.com/ayan15888/dither_animals
+repository: https://github.com/ayan15888/dither_animals
+issue_tracker: https://github.com/ayan15888/dither_animals/issues
 
 topics:
   - animation
