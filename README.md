@@ -1,11 +1,19 @@
 # dither_animals
 
-[![pub package](https://img.shields.io/badge/pub-v1.0.0-blue.svg)](https://pub.dev/packages/dither_animals)
+[![pub package](https://img.shields.io/badge/pub-v1.0.1-blue.svg)](https://pub.dev/packages/dither_animals)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Flutter](https://img.shields.io/badge/Flutter-%3E%3D3.10.0-02569B?logo=flutter)](https://flutter.dev)
 [![GitHub](https://img.shields.io/badge/GitHub-ayan15888%2Fdither__animals-181717?logo=github)](https://github.com/ayan15888/dither_animals)
 
 Cute animated dithered (stipple, halftone, and ordered-dither) animal widgets for Flutter.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ayan15888/dither_animals/main/doc/preview.gif" alt="dither_animals animated demo" width="680" style="max-width: 100%; border-radius: 12px;"/>
+</p>
+
+<p align="center">
+  <sub>🎬 <i>Watch the full high-definition video demo: <a href="https://github.com/ayan15888/dither_animals/raw/main/doc/things10.mp4"><b>things10.mp4</b></a></i></sub>
+</p>
 
 Rendered entirely on the Flutter `Canvas` using an **ordered 8×8 Bayer dithering matrix**, each animal features its own handcrafted animation curves, unique entrance/reveal transitions, facial expressions, idle breathing/swaying, and interactive poke physics with haptic feedback.
 

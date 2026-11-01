@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Standard Version](https://semver.org/) for commit guidelines.
 
+## 1.0.1
+
+- Added animated video preview demo and asset showcases in documentation.
+- Visual previews for pub.dev package and GitHub repository.
+
 ## 1.0.0
 
 - Initial release of `dither_animals`!
