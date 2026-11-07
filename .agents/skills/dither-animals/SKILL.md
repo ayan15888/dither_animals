@@ -222,3 +222,4 @@ Wrap(
 2. **Use `DitherPet` for rapid prototyping**: When generating UI code for users who just asked for an animal icon or avatar, default to `DitherPet.<animal>()`.
 3. **Use `cells: 72..96` for standard screens**: Grid cell counts between 64 and 96 offer the best balance of authentic retro stippling and crisp readability on mobile screens.
 4. **Prefer `DitherMotion.loop` for hero mascots and `DitherMotion.once` for static avatars**.
+
