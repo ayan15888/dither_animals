@@ -15,8 +15,7 @@ export 'src/animal_shapes.dart'
         EyeSpec,
         ShapeLayer,
         kAnimalArt;
-export 'src/dither_animal.dart'
-    show DitherAnimal, DitherDot, DitherMotion;
+export 'src/dither_animal.dart' show DitherAnimal, DitherDot, DitherMotion;
 export 'src/theme.dart'
     show DitherTheme, DitherColorMode, DitherPart, DitherHooks;
 export 'src/expression.dart'

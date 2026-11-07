@@ -25,7 +25,8 @@ enum RevealStyle {
 
 /// Whole-body transform, in 100-space. Rotation in radians.
 class BodyPose {
-  const BodyPose({this.dx = 0, this.dy = 0, this.rot = 0, this.sx = 1, this.sy = 1});
+  const BodyPose(
+      {this.dx = 0, this.dy = 0, this.rot = 0, this.sx = 1, this.sy = 1});
   final double dx, dy, rot, sx, sy;
 
   static const identity = BodyPose();
@@ -89,7 +90,6 @@ double _env(double u, [double a = 0.3, double r = 0.3]) {
 
 double _headW(double y, double span) => _clamp01((span - y) / span);
 
-
 // ---------------------------------------------------------------------------
 // Shared natural-behaviour layer used by characters without scripted actions.
 // ---------------------------------------------------------------------------
@@ -124,7 +124,6 @@ Offset organicWarp(double x, double y, double t, double seed) {
   return Offset((scan + dir * tilt * 2.6) * h, (nod + tilt * 0.8) * h * h);
 }
 
-
 /// Ease with a little overshoot (0..1 -> ~0..1.1 -> 1).
 double backOut(double f, [double c1 = 1.70158]) {
   final x = f - 1;
@@ -150,7 +149,6 @@ class RoarFx {
   /// Centre of the emphasis lines / shock rings drawn while roaring.
   final Offset burst;
 }
-
 
 /// A personality: how one animal builds in, idles, blinks and dissolves.
 class AnimalMotion {
@@ -265,7 +263,8 @@ class AnimalMotion {
       case RevealStyle.spiral:
         final sx = x - revealCenter.dx, sy = y - revealCenter.dy;
         final sang = (math.atan2(sy, sx) + math.pi) / (2 * math.pi);
-        base = 0.55 * sang + 0.45 * math.min(1.0, math.sqrt(sx * sx + sy * sy) / 60.0);
+        base = 0.55 * sang +
+            0.45 * math.min(1.0, math.sqrt(sx * sx + sy * sy) / 60.0);
       case RevealStyle.splitX:
         base = (x - 50).abs() / 50;
       case RevealStyle.splitY:
@@ -307,8 +306,8 @@ BodyPose _owlEntrance(double f) {
 BodyPose _rabbitEntrance(double f) => BodyPose(dy: -38 * (1 - f * f));
 
 // Fish glides in from the right, wiggling.
-BodyPose _fishEntrance(double f) =>
-    BodyPose(dx: 36 * (1 - f) * (1 - f), rot: math.sin(f * 14) * 0.06 * (1 - f));
+BodyPose _fishEntrance(double f) => BodyPose(
+    dx: 36 * (1 - f) * (1 - f), rot: math.sin(f * 14) * 0.06 * (1 - f));
 
 // Turtle rises slowly from below.
 BodyPose _turtleEntrance(double f) => BodyPose(dy: 18 * (1 - f) * (1 - f));
@@ -528,7 +527,8 @@ Offset _frogWarp(double x, double y, double t) {
 // ---------------------------------------------------------------------------
 BodyPose _octoEntrance(double f) {
   final e = (1 - f) * (1 - f);
-  return BodyPose(dy: 40 * e, rot: math.sin(f * 9) * 0.35 * (1 - f), sx: 1 - 0.12 * e);
+  return BodyPose(
+      dy: 40 * e, rot: math.sin(f * 9) * 0.35 * (1 - f), sx: 1 - 0.12 * e);
 }
 
 BodyPose _octoPose(double t) {
@@ -554,8 +554,7 @@ Offset _octoWarp(double x, double y, double t) {
 // ---------------------------------------------------------------------------
 BodyPose _bearEntrance(double f) {
   final e = (1 - f);
-  return BodyPose(
-      dx: -48 * e * e, rot: -7 * math.pow(e, 1.6).toDouble());
+  return BodyPose(dx: -48 * e * e, rot: -7 * math.pow(e, 1.6).toDouble());
 }
 
 BodyPose _bearPose(double t) {
@@ -587,13 +586,18 @@ Offset _bearWarp(double x, double y, double t) {
 double _lionU(double t) => _u(t, 4.6, 2.6, 90.0);
 
 /// Anticipation (inhale) 0..1..0 over the first third of the action.
-double _lionAnt(double u) =>
-    u < 0 ? 0.0 : (u < 0.22 ? _sm(u / 0.22) : (u < 0.34 ? 1 - _sm((u - 0.22) / 0.12) : 0.0));
+double _lionAnt(double u) => u < 0
+    ? 0.0
+    : (u < 0.22
+        ? _sm(u / 0.22)
+        : (u < 0.34 ? 1 - _sm((u - 0.22) / 0.12) : 0.0));
 
 /// Roar intensity: snaps up fast, holds, then releases.
 double _lionRoarAmt(double u) => u < 0.22
     ? 0.0
-    : (u < 0.34 ? _sm((u - 0.22) / 0.12) : (u < 0.8 ? 1.0 : 1 - _sm((u - 0.8) / 0.2)));
+    : (u < 0.34
+        ? _sm((u - 0.22) / 0.12)
+        : (u < 0.8 ? 1.0 : 1 - _sm((u - 0.8) / 0.2)));
 
 double _lionOpen(double t) {
   final u = _lionU(t);
@@ -631,8 +635,10 @@ BodyPose _lionPoseAt(double t, double u) {
   );
 }
 
-Offset _lionWarp(double x, double y, double t) => _lionWarpAt(x, y, t, _lionU(t));
-Offset _lionCalmWarp(double x, double y, double t) => _lionWarpAt(x, y, t, -1.0);
+Offset _lionWarp(double x, double y, double t) =>
+    _lionWarpAt(x, y, t, _lionU(t));
+Offset _lionCalmWarp(double x, double y, double t) =>
+    _lionWarpAt(x, y, t, -1.0);
 
 Offset _lionWarpAt(double x, double y, double t, double u) {
   final a = _lionAnt(u), r = _lionRoarAmt(u), open = u < 0 ? 0.0 : _lionOpen(t);
@@ -674,11 +680,13 @@ BodyPose _tigerPose(double t) => BodyPose(
 Offset _tigerWarp(double x, double y, double t) {
   if (x > 66 && y > 58) {
     final w = _clamp01((x - 66) / 28);
-    return Offset(math.sin(t * 2.8) * 6 * w * w, math.sin(t * 2.8 + 1) * 2.5 * w);
+    return Offset(
+        math.sin(t * 2.8) * 6 * w * w, math.sin(t * 2.8 + 1) * 2.5 * w);
   }
   if (y < 32 && (x < 34 || x > 66)) {
     final tw = math.pow(math.max(0.0, math.sin(t * 1.1 + 1)), 10).toDouble();
-    return Offset((x < 50 ? 1.0 : -1.0) * tw * 2.6 * _clamp01((32 - y) / 18), 0);
+    return Offset(
+        (x < 50 ? 1.0 : -1.0) * tw * 2.6 * _clamp01((32 - y) / 18), 0);
   }
   return Offset.zero;
 }
@@ -686,13 +694,13 @@ Offset _tigerWarp(double x, double y, double t) {
 // Dog: bounds in with decaying bounces, wags tail like mad, floppy ears,
 // panting tongue, curious head cock.
 BodyPose _dogEntrance(double f) => BodyPose(
-    dx: -46 * (1 - f),
-    dy: -math.sin(f * math.pi * 3).abs() * 14 * (1 - f));
+    dx: -46 * (1 - f), dy: -math.sin(f * math.pi * 3).abs() * 14 * (1 - f));
 
 BodyPose _dogPose(double t) {
   final c = math.pow(math.max(0.0, math.sin(t * 0.8)), 4).toDouble();
   return BodyPose(
-      rot: math.sin(t * 2.2) * 0.03 + c * 0.14, dy: -math.sin(t * 6).abs() * 0.8);
+      rot: math.sin(t * 2.2) * 0.03 + c * 0.14,
+      dy: -math.sin(t * 6).abs() * 0.8);
 }
 
 Offset _dogWarp(double x, double y, double t) {
@@ -744,12 +752,14 @@ BodyPose _mousePose(double t) {
 
 Offset _mouseWarp(double x, double y, double t) {
   if (y > 52 && y < 70 && (x - 50).abs() < 12) {
-    return Offset(math.sin(t * 15) * 0.6, math.sin(t * 15) * 0.5); // nose twitch
+    return Offset(
+        math.sin(t * 15) * 0.6, math.sin(t * 15) * 0.5); // nose twitch
   }
   if (y < 44 && (x < 34 || x > 66)) {
     final w = _clamp01((44 - y) / 26);
     final flick = _env(_u(t, 2.6, 0.4, x < 50 ? 102.0 : 103.0), 0.3, 0.4);
-    return Offset((x < 50 ? 1.0 : -1.0) * 2.2 * flick * w, math.sin(t * 2.2 + (x < 50 ? 0.0 : 1.0)) * 1.2 * w);
+    return Offset((x < 50 ? 1.0 : -1.0) * 2.2 * flick * w,
+        math.sin(t * 2.2 + (x < 50 ? 0.0 : 1.0)) * 1.2 * w);
   }
   if (x > 66 && y > 54) {
     final w = _clamp01((x - 66) / 30);
@@ -818,7 +828,8 @@ Offset _duckWarp(double x, double y, double t) {
   // wings flutter
   if ((x < 30 || x > 70) && y > 60 && y < 96) {
     final s = x < 50 ? -1.0 : 1.0;
-    final w = _clamp01((math.min(x, 100 - x) < 30 ? (30 - math.min(x, 100 - x)) : 0) / 14);
+    final w = _clamp01(
+        (math.min(x, 100 - x) < 30 ? (30 - math.min(x, 100 - x)) : 0) / 14);
     return Offset(s * math.sin(t * 6) * 1.2 * w, math.sin(t * 6 + 1) * 1.8 * w);
   }
   // head bob
@@ -843,7 +854,8 @@ Offset _sheepWarp(double x, double y, double t) {
   if (r > 22) {
     final w = _clamp01((r - 22) / 14);
     final a = math.atan2(dy, dx);
-    return Offset(math.sin(t * 7 + a * 3) * 1.3 * w, math.cos(t * 7 + a * 3) * 1.3 * w);
+    return Offset(
+        math.sin(t * 7 + a * 3) * 1.3 * w, math.cos(t * 7 + a * 3) * 1.3 * w);
   }
   return Offset.zero;
 }
@@ -926,7 +938,8 @@ Offset _whaleWarp(double x, double y, double t) {
     final ph = x < 52 ? 0.0 : (x < 60 ? 0.33 : 0.66);
     return Offset(0, ((t * 1.1 + ph) % 1.0) * 9);
   }
-  return Offset(0, math.sin(t * 3 - x * 0.07) * (0.8 + 3 * _clamp01((45 - x) / 40)));
+  return Offset(
+      0, math.sin(t * 3 - x * 0.07) * (0.8 + 3 * _clamp01((45 - x) / 40)));
 }
 
 // Bee: zig-zags in from the top-right, hovers in a figure-eight, wings buzz.
@@ -944,8 +957,9 @@ Offset _beeWarp(double x, double y, double t) {
 }
 
 // Cow: lumbers in, slow head nod, chews, ears flap, tail-less sway.
-BodyPose _cowEntrance(double f) =>
-    BodyPose(dx: -44 * (1 - f) * (1 - f), dy: -math.sin(f * math.pi * 3).abs() * 3 * (1 - f));
+BodyPose _cowEntrance(double f) => BodyPose(
+    dx: -44 * (1 - f) * (1 - f),
+    dy: -math.sin(f * math.pi * 3).abs() * 3 * (1 - f));
 
 BodyPose _cowPose(double t) =>
     BodyPose(rot: math.sin(t * 1.1) * 0.03, dy: math.sin(t * 2.2).abs() * -0.8);
@@ -970,7 +984,8 @@ BodyPose _giraffePose(double t) => BodyPose(rot: math.sin(t * 1.0) * 0.02);
 Offset _giraffeWarp(double x, double y, double t) {
   if (y < 62) {
     final w = _clamp01((62 - y) / 62);
-    return Offset(math.sin(t * 1.0 - 0.9) * 4.5 * w * w, math.sin(t * 2.0) * 1.2 * w);
+    return Offset(
+        math.sin(t * 1.0 - 0.9) * 4.5 * w * w, math.sin(t * 2.0) * 1.2 * w);
   }
   return Offset.zero;
 }
@@ -989,7 +1004,9 @@ Offset _zebraWarp(double x, double y, double t) {
     return Offset(math.sin(t * 5 - y * 0.15) * 2 * w, 0);
   }
   if (y < 28 && (x < 36 || x > 64)) {
-    final f = math.pow(math.max(0.0, math.sin(t * 2.7 + (x < 50 ? 0.0 : 2.0))), 6).toDouble();
+    final f = math
+        .pow(math.max(0.0, math.sin(t * 2.7 + (x < 50 ? 0.0 : 2.0))), 6)
+        .toDouble();
     return Offset((x < 50 ? -1 : 1) * 2.5 * f, 0);
   }
   if (y > 64 && y < 80 && (x - 50).abs() < 17) {
@@ -1029,7 +1046,8 @@ BodyPose _flamingoPose(double t) => BodyPose(rot: math.sin(t * 1.2) * 0.025);
 Offset _flamingoWarp(double x, double y, double t) {
   if (x > 46 && y < 64) {
     final w = _clamp01((64 - y) / 44);
-    return Offset(math.sin(t * 1.5 - y * 0.05) * 4 * w, math.sin(t * 1.5) * 2 * w * w);
+    return Offset(
+        math.sin(t * 1.5 - y * 0.05) * 4 * w, math.sin(t * 1.5) * 2 * w * w);
   }
   if (x < 50 && y > 56 && y < 82) {
     return Offset(math.sin(t * 3 - x * 0.1) * 0.9, 0);
@@ -1039,10 +1057,14 @@ Offset _flamingoWarp(double x, double y, double t) {
 
 // Butterfly: flutters in a lazy loop, wings fold open and shut.
 BodyPose _butterflyEntrance(double f) => BodyPose(
-    dx: math.sin(f * 9) * 8 * (1 - f), dy: -30 * (1 - f) * (1 - f), rot: math.sin(f * 7) * 0.2 * (1 - f));
+    dx: math.sin(f * 9) * 8 * (1 - f),
+    dy: -30 * (1 - f) * (1 - f),
+    rot: math.sin(f * 7) * 0.2 * (1 - f));
 
 BodyPose _butterflyPose(double t) => BodyPose(
-    dx: math.sin(t * 0.9) * 5, dy: math.sin(t * 1.8) * 4, rot: math.sin(t * 0.9) * 0.05);
+    dx: math.sin(t * 0.9) * 5,
+    dy: math.sin(t * 1.8) * 4,
+    rot: math.sin(t * 0.9) * 0.05);
 
 Offset _butterflyWarp(double x, double y, double t) {
   final d = x - 50;
@@ -1063,28 +1085,35 @@ Offset _butterflyWarp(double x, double y, double t) {
 BodyPose _snailEntrance(double f) => BodyPose(dx: -40 * (1 - f) * (1 - f));
 
 BodyPose _snailPose(double t) => BodyPose(
-    dx: 2.2 * math.sin(t * 0.33) + 0.8 * _nz(t, 1), sy: 1 + 0.008 * math.sin(t * 1.1));
+    dx: 2.2 * math.sin(t * 0.33) + 0.8 * _nz(t, 1),
+    sy: 1 + 0.008 * math.sin(t * 1.1));
 
 Offset _snailWarp(double x, double y, double t) {
   final r = _env(_u(t, 6.0, 2.6, 3.0), 0.18, 0.45);
   if (x > 66 && y < 46) {
     final w = _clamp01((46 - y) / 26);
     final id = x > 82 ? 1.0 : 0.0;
-    return Offset(_nz(t, 2 + id * 3) * 3.2 * w * (1 - r) - r * 2.0 * w, r * 15 * w);
+    return Offset(
+        _nz(t, 2 + id * 3) * 3.2 * w * (1 - r) - r * 2.0 * w, r * 15 * w);
   }
   if (y > 78) {
     final ph = t * 2.4 - x * 0.12;
     return Offset(math.sin(ph) * 0.5, math.sin(ph) * 0.7);
   }
-  if (x > 66 && y > 44 && y < 80) return Offset(_nz(t, 7) * 0.8 * (1 - r * 0.6), 0);
-  if (x < 66) return Offset(_nz(t, 5) * 0.5 * _clamp01((82 - y) / 60), 0);
+  if (x > 66 && y > 44 && y < 80) {
+    return Offset(_nz(t, 7) * 0.8 * (1 - r * 0.6), 0);
+  }
+  if (x < 66) {
+    return Offset(_nz(t, 5) * 0.5 * _clamp01((82 - y) / 60), 0);
+  }
   return Offset.zero;
 }
 
 // Squirrel: alert and twitchy. Quick hops with a crouch and landing, tail
 // flicks that whip and settle, ears and nose twitch in short bursts.
 BodyPose _squirrelEntrance(double f) => BodyPose(
-    dx: 40 * (1 - f) * (1 - f), dy: -math.sin(f * math.pi * 3).abs() * 9 * (1 - f));
+    dx: 40 * (1 - f) * (1 - f),
+    dy: -math.sin(f * math.pi * 3).abs() * 9 * (1 - f));
 
 BodyPose _squirrelPose(double t) {
   final u = _u(t, 6.5, 1.0, 4.0);
@@ -1106,8 +1135,10 @@ Offset _squirrelWarp(double x, double y, double t) {
   if (x < 36 && y > 20) {
     final w = _clamp01((36 - x) / 34);
     final fu = _u(t, 4.0, 0.9, 9.0);
-    final flick = fu < 0 ? 0.0 : math.sin(fu * math.pi * 3) * math.exp(-3 * fu) * 7;
-    return Offset(-w * w * (_nz(t, 8) * 3.0 + flick), w * (_nz(t, 9) * 1.5 - flick.abs() * 0.3));
+    final flick =
+        fu < 0 ? 0.0 : math.sin(fu * math.pi * 3) * math.exp(-3 * fu) * 7;
+    return Offset(-w * w * (_nz(t, 8) * 3.0 + flick),
+        w * (_nz(t, 9) * 1.5 - flick.abs() * 0.3));
   }
   if (y < 30 && (x < 44 || x > 56)) {
     final e = _env(_u(t, 3.5, 0.35, x < 50 ? 10.0 : 11.0), 0.2, 0.4);
@@ -1179,7 +1210,9 @@ Offset _parrotWarp(double x, double y, double t) {
   var dx = 0.0, dy = 0.0;
   if (y < 66) {
     final w = _clamp01((66 - y) / 50);
-    if (bu >= 0) dx += math.sin(bu * math.pi * 6) * _env(bu, 0.15, 0.25) * 2.5 * w;
+    if (bu >= 0) {
+      dx += math.sin(bu * math.pi * 6) * _env(bu, 0.15, 0.25) * 2.5 * w;
+    }
   }
   if (y < 22) {
     final c = _env(_u(t, 8.0, 1.6, 23.0), 0.2, 0.4);
@@ -1254,7 +1287,9 @@ Offset _sharkWarp(double x, double y, double t) {
   final w = _clamp01(x / 100);
   final burst = 1 + 0.6 * _env(_u(t, 8.0, 3.0, 31.0), 0.3, 0.4);
   final dy = math.sin(t * 3.1 - x * 0.075) * (0.35 + 3.4 * w * w) * burst;
-  final dx = y < 36 ? math.sin(t * 3.1 - x * 0.075 - 0.6) * 1.2 * _clamp01((36 - y) / 28) : 0.0;
+  final dx = y < 36
+      ? math.sin(t * 3.1 - x * 0.075 - 0.6) * 1.2 * _clamp01((36 - y) / 28)
+      : 0.0;
   return Offset(dx, dy);
 }
 
@@ -1294,15 +1329,16 @@ Offset _chickenWarp(double x, double y, double t) {
     return Offset(fl * 2.4 * w, -fl.abs() * 3 * w);
   }
   if (x < 48 && y > 60 && y < 88) {
-    return Offset(0, math.sin(t * 30) * 0.8 * _env(_u(t, 9.0, 1.2, 37.0), 0.2, 0.3));
+    return Offset(
+        0, math.sin(t * 30) * 0.8 * _env(_u(t, 9.0, 1.2, 37.0), 0.2, 0.3));
   }
   return Offset.zero;
 }
 
 // Ladybug: walks in short steps (smooth start/stop, alternating direction),
 // legs scuttle only while moving, antennae probe, shell sometimes lifts.
-BodyPose _ladybugEntrance(double f) =>
-    BodyPose(dy: -40 * (1 - f) * (1 - f), rot: math.sin(f * 12) * 0.2 * (1 - f));
+BodyPose _ladybugEntrance(double f) => BodyPose(
+    dy: -40 * (1 - f) * (1 - f), rot: math.sin(f * 12) * 0.2 * (1 - f));
 
 double _ladyWalk(double t) => _sm((t % 3.4) / 1.5);
 
@@ -1325,7 +1361,8 @@ Offset _ladybugWarp(double x, double y, double t) {
   final l = _env(_u(t, 6.5, 2.2, 42.0), 0.25, 0.35);
   if (y > 40 && y < 94 && (x - 50).abs() > 4 && (x - 50).abs() < 38) {
     final side = (x - 50).abs() / 38;
-    return Offset((x - 50) * 0.1 * l, -l * 2.2 * side + math.sin(t * 35) * 0.4 * l);
+    return Offset(
+        (x - 50) * 0.1 * l, -l * 2.2 * side + math.sin(t * 35) * 0.4 * l);
   }
   if ((x < 24 || x > 76) && y > 44 && y < 80) {
     return Offset(0, math.sin(t * 18 + y * 0.4) * 1.1 * walking);
@@ -1336,7 +1373,9 @@ Offset _ladybugWarp(double x, double y, double t) {
 // Wolf: watchful. Head slowly scans, ears swivel independently, ruff
 // ripples; occasionally lifts its snout for a long, slow howl.
 BodyPose _wolfEntrance(double f) => BodyPose(
-    dx: 44 * (1 - f), dy: -math.sin(f * math.pi) * 18 * (1 - f), rot: 0.3 * (1 - f));
+    dx: 44 * (1 - f),
+    dy: -math.sin(f * math.pi) * 18 * (1 - f),
+    rot: 0.3 * (1 - f));
 
 BodyPose _wolfPose(double t) {
   final h = _env(_u(t, 8.5, 4.2, 44.0), 0.3, 0.3);
@@ -1368,7 +1407,8 @@ BodyPose _horseEntrance(double f) => BodyPose(
 
 BodyPose _horsePose(double t) {
   final p = _env(_u(t, 6.5, 1.3, 51.0), 0.3, 0.4);
-  return BodyPose(rot: -p * 0.04, dy: -p * 1.5, sy: 1 + 0.008 * math.sin(t * 1.6));
+  return BodyPose(
+      rot: -p * 0.04, dy: -p * 1.5, sy: 1 + 0.008 * math.sin(t * 1.6));
 }
 
 Offset _horseWarp(double x, double y, double t) {
@@ -1385,7 +1425,9 @@ Offset _horseWarp(double x, double y, double t) {
     dy -= 2.4 * e;
   }
   final sn = _env(_u(t, 5.0, 0.7, 55.0), 0.2, 0.4);
-  if (y > 66 && y < 80 && (x - 50).abs() < 14) dy += math.sin(t * 22) * 0.7 * sn;
+  if (y > 66 && y < 80 && (x - 50).abs() < 14) {
+    dy += math.sin(t * 22) * 0.7 * sn;
+  }
   return Offset(dx, dy);
 }
 
@@ -1393,7 +1435,8 @@ Offset _horseWarp(double x, double y, double t) {
 // humps wobble a beat late, long slow blinks.
 BodyPose _camelEntrance(double f) => BodyPose(dx: 44 * (1 - f) * (1 - f));
 
-BodyPose _camelPose(double t) => BodyPose(rot: _nz(t, 56) * 0.015, sy: 1 + 0.01 * math.sin(t * 1.2));
+BodyPose _camelPose(double t) =>
+    BodyPose(rot: _nz(t, 56) * 0.015, sy: 1 + 0.01 * math.sin(t * 1.2));
 
 Offset _camelWarp(double x, double y, double t) {
   if (y < 38 && (x - 50).abs() > 12 && (x - 50).abs() < 30) {
@@ -1449,19 +1492,26 @@ BodyPose _goatPose(double t) {
 Offset _goatWarp(double x, double y, double t) {
   if (y > 74 && (x - 50).abs() < 10) {
     final w = _clamp01((y - 74) / 24);
-    return Offset(math.sin(t * 5 + y * 0.1) * 2.2 * w * (0.4 + 0.6 * (0.5 + 0.5 * _nz(t, 62))), 0);
+    return Offset(
+        math.sin(t * 5 + y * 0.1) *
+            2.2 *
+            w *
+            (0.4 + 0.6 * (0.5 + 0.5 * _nz(t, 62))),
+        0);
   }
   if (y > 28 && y < 46 && (x < 20 || x > 80)) {
     final e = _env(_u(t, 3.2, 0.4, x < 50 ? 63.0 : 64.0), 0.2, 0.4);
     return Offset(0, -2.8 * e);
   }
-  if (y > 60 && y < 72 && (x - 50).abs() < 14) return Offset(math.sin(t * 6) * 0.5, 0);
+  if (y > 60 && y < 72 && (x - 50).abs() < 14) {
+    return Offset(math.sin(t * 6) * 0.5, 0);
+  }
   return Offset.zero;
 }
 
 // Seal: bursts of flipper claps, nose-up pose, whiskers twitch, body bobs.
-BodyPose _sealEntrance(double f) => BodyPose(
-    dy: -30 * (1 - f) * (1 - f), sy: 1 + 0.12 * (1 - f));
+BodyPose _sealEntrance(double f) =>
+    BodyPose(dy: -30 * (1 - f) * (1 - f), sy: 1 + 0.12 * (1 - f));
 
 BodyPose _sealPose(double t) {
   final n = _env(_u(t, 7.0, 2.4, 65.0), 0.3, 0.3);
@@ -1471,7 +1521,8 @@ BodyPose _sealPose(double t) {
 Offset _sealWarp(double x, double y, double t) {
   if (y > 66 && y < 92 && (x - 50).abs() > 30) {
     final cu = _u(t, 5.0, 1.6, 66.0);
-    final c = cu < 0 ? 0.0 : math.sin(cu * math.pi * 6).abs() * _env(cu, 0.1, 0.2);
+    final c =
+        cu < 0 ? 0.0 : math.sin(cu * math.pi * 6).abs() * _env(cu, 0.1, 0.2);
     final s = x < 50 ? -1.0 : 1.0;
     return Offset(-s * c * 3.5, -c * 6);
   }
@@ -1483,11 +1534,12 @@ Offset _sealWarp(double x, double y, double t) {
 }
 
 // Bat: hovers; wings fold and open with an uneven flutter, ears swivel.
-BodyPose _batEntrance(double f) => BodyPose(
-    dy: -36 * (1 - f) * (1 - f), dx: math.sin(f * 8) * 6 * (1 - f));
+BodyPose _batEntrance(double f) =>
+    BodyPose(dy: -36 * (1 - f) * (1 - f), dx: math.sin(f * 8) * 6 * (1 - f));
 
 BodyPose _batPose(double t) => BodyPose(
-    dx: _nz(t, 67) * 3.0, dy: _nz(t * 1.3, 68) * 3.5 + math.sin(t * 8) * 0.8,
+    dx: _nz(t, 67) * 3.0,
+    dy: _nz(t * 1.3, 68) * 3.5 + math.sin(t * 8) * 0.8,
     rot: _nz(t, 69) * 0.05);
 
 Offset _batWarp(double x, double y, double t) {
@@ -1533,14 +1585,19 @@ BodyPose _jellyfishEntrance(double f) => BodyPose(dy: 40 * (1 - f) * (1 - f));
 
 BodyPose _jellyfishPose(double t) {
   final c = _jellyPulse(t);
-  return BodyPose(dy: -c * 4 + math.sin(t * 0.7) * 1.2, sy: 1 - 0.09 * c, sx: 1 + 0.07 * c, dx: _nz(t, 78) * 1.5);
+  return BodyPose(
+      dy: -c * 4 + math.sin(t * 0.7) * 1.2,
+      sy: 1 - 0.09 * c,
+      sx: 1 + 0.07 * c,
+      dx: _nz(t, 78) * 1.5);
 }
 
 Offset _jellyfishWarp(double x, double y, double t) {
   if (y > 60) {
     final w = _clamp01((y - 60) / 40);
     final lag = _jellyPulse(t - 0.3 * w);
-    return Offset(math.sin(t * 2.0 - y * 0.09 + x * 0.05) * 3.2 * w * (0.6 + 0.4 * lag),
+    return Offset(
+        math.sin(t * 2.0 - y * 0.09 + x * 0.05) * 3.2 * w * (0.6 + 0.4 * lag),
         lag * 5 * w * w);
   }
   if (y < 62) return Offset((x - 50) * 0.04 * _jellyPulse(t), 0);
@@ -1550,7 +1607,8 @@ Offset _jellyfishWarp(double x, double y, double t) {
 // Peacock: struts, bobbing its head; now and then fans its tail wide and
 // shivers it, then lowers it again.
 BodyPose _peacockEntrance(double f) => BodyPose(
-    dx: 40 * (1 - f) * (1 - f), dy: -math.sin(f * math.pi * 3).abs() * 3 * (1 - f));
+    dx: 40 * (1 - f) * (1 - f),
+    dy: -math.sin(f * math.pi * 3).abs() * 3 * (1 - f));
 
 BodyPose _peacockPose(double t) => BodyPose(sy: 1 + 0.008 * math.sin(t * 2.0));
 
@@ -1559,7 +1617,8 @@ Offset _peacockWarp(double x, double y, double t) {
   if (y < 66 && (x - 50).abs() > 12) {
     final w = _clamp01(((x - 50).abs() - 12) / 36);
     final shiver = math.sin(t * 24) * 0.7 * fan * w;
-    return Offset((x - 50) * 0.07 * fan * w + shiver, -fan * 4 * w + shiver * 0.5);
+    return Offset(
+        (x - 50) * 0.07 * fan * w + shiver, -fan * 4 * w + shiver * 0.5);
   }
   if (y > 28 && y < 66 && (x - 50).abs() < 12) {
     final w = _clamp01((66 - y) / 38);
@@ -1572,7 +1631,8 @@ Offset _peacockWarp(double x, double y, double t) {
 // Red panda: curious. Stands tall now and then, big ringed tail ripples in a
 // travelling wave, ears flick, nose sniffs in short bursts.
 BodyPose _redpandaEntrance(double f) => BodyPose(
-    dx: 40 * (1 - f) * (1 - f), dy: -math.sin(f * math.pi * 3).abs() * 8 * (1 - f));
+    dx: 40 * (1 - f) * (1 - f),
+    dy: -math.sin(f * math.pi * 3).abs() * 8 * (1 - f));
 
 BodyPose _redpandaPose(double t) {
   final r = _env(_u(t, 7.0, 2.2, 81.0), 0.3, 0.3);
@@ -1591,7 +1651,8 @@ Offset _redpandaWarp(double x, double y, double t) {
     return Offset(0, -2.4 * e);
   }
   if (y > 56 && y < 68 && (x - 50).abs() < 9) {
-    return Offset(0, math.sin(t * 14) * 0.5 * _env(_u(t, 3.0, 1.0, 83.0), 0.2, 0.3));
+    return Offset(
+        0, math.sin(t * 14) * 0.5 * _env(_u(t, 3.0, 1.0, 83.0), 0.2, 0.3));
   }
   return Offset.zero;
 }

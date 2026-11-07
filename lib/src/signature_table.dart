@@ -2,176 +2,335 @@
 part of 'animal_motion.dart';
 
 const Map<DitherAnimalType, SigSpec> kSignatureSpecs = {
-  DitherAnimalType.penguin: SigSpec(7.0, 2.6, 71.0,
-    pose: [SigOp('hop', [2.0, 5.0, 0.12])],
-    warp: [SigOp('wave', [-10.0, 48.0, 28.0, 92.0, -4.0, -6.0, 13.0, 0.0, 4.0, 0.0]), SigOp('wave', [72.0, 48.0, 110.0, 92.0, 4.0, -6.0, 13.0, 0.0, 4.0, 0.0])],
-    fx: [SigOp('dust', [50.0, 96.0, 6.0, 2.0, 0.1, 0.9, 22.0]), SigOp('stars', [50.0, 40.0, 6.0, 2.4, 0.25, 0.95, 24.0])]),
-  DitherAnimalType.frog: SigSpec(6.5, 2.6, 72.0,
-    pose: [SigOp('crouch', [3.0, 0.08]), SigOp('hop', [1.0, 6.0, 0.0])],
-    warp: [SigOp('puff', [50.0, 70.0, 24.0, 3.0])],
-    fx: [SigOp('tongue', [60.0, 62.0, 1.0, 3.0, 0.35, 0.6, 36.0])]),
-  DitherAnimalType.octopus: SigSpec(7.5, 2.6, 73.0,
-    pose: [SigOp('dash', [-12.0, 0.05]), SigOp('puff', [0.94, 1.06])],
-    warp: [SigOp('wave', [-10.0, 60.0, 110.0, 110.0, 0.0, 5.0, 13.0, 0.1, 3.0, 0.0])],
-    fx: [SigOp('cloud', [72.0, 70.0, 7.0, 6.0, 0.22, 0.95, 14.0])]),
-  DitherAnimalType.bear: SigSpec(7.0, 3.0, 74.0,
-    pose: [SigOp('shake', [18.0, 0.045])],
-    warp: [SigOp('wave', [-10.0, -10.0, 36.0, 42.0, 0.0, -2.0, 13.0, 0.0, 4.0, 0.0]), SigOp('wave', [64.0, -10.0, 110.0, 42.0, 0.0, -2.0, 13.0, 0.0, 4.0, 0.0])],
-    fx: [SigOp('orbit', [50.0, 22.0, 4.0, 1.7, 0.1, 0.95, 34.0])]),
-  DitherAnimalType.tiger: SigSpec(7.5, 2.4, 75.0,
-    pose: [SigOp('crouch', [4.0, 0.08]), SigOp('dash', [12.0, 0.06])],
-    warp: [SigOp('wave', [64.0, 50.0, 110.0, 100.0, 0.0, 7.0, 12.0, 0.06, 1.0, 0.0])],
-    fx: [SigOp('lines', [30.0, 60.0, 4.0, 4.0, 0.25, 0.8, 14.0])]),
-  DitherAnimalType.dog: SigSpec(6.0, 2.4, 76.0,
-    pose: [SigOp('hop', [2.0, 3.0, 0.04])],
-    warp: [SigOp('wave', [66.0, 56.0, 110.0, 100.0, 8.0, 0.0, 13.0, 0.0, 1.0, 0.0])],
-    fx: [SigOp('rings', [62.0, 60.0, 3.0, 7.0, 0.2, 0.85, 0.0])]),
-  DitherAnimalType.panda: SigSpec(8.0, 2.8, 77.0,
-    pose: [SigOp('spin', [1.0])],
-    warp: [],
-    fx: [SigOp('dust', [50.0, 96.0, 8.0, 2.4, 0.1, 0.95, 26.0])]),
-  DitherAnimalType.mouse: SigSpec(6.5, 2.2, 101.0,
-    pose: [SigOp('bounce', [4.0, 0.04])],
-    warp: [SigOp('wave', [-10.0, -10.0, 36.0, 42.0, 0.0, -3.0, 13.0, 0.0, 4.0, 0.0]), SigOp('wave', [64.0, -10.0, 110.0, 42.0, 0.0, -3.0, 13.0, 0.0, 4.0, 0.0]), SigOp('wave', [64.0, 50.0, 110.0, 100.0, 0.0, 6.0, 10.0, 0.08, 1.0, 0.0])],
-    fx: [SigOp('rings', [50.0, 62.0, 3.0, 4.0, 0.25, 0.85, 0.0]), SigOp('hearts', [50.0, 28.0, 2.0, 2.2, 0.45, 0.95, 0.0])]),
-  DitherAnimalType.fox: SigSpec(7.0, 2.4, 78.0,
-    pose: [SigOp('hop', [1.0, 14.0, 0.3])],
-    warp: [SigOp('wave', [66.0, 44.0, 110.0, 100.0, 6.0, -2.0, 10.0, 0.05, 1.0, 0.0])],
-    fx: [SigOp('dust', [50.0, 96.0, 7.0, 2.4, 0.5, 0.98, 24.0])]),
-  DitherAnimalType.monkey: SigSpec(6.5, 2.6, 79.0,
-    pose: [SigOp('hop', [2.0, 4.0, 0.05])],
-    warp: [SigOp('lift', [-10.0, 48.0, 28.0, 92.0, 4.0, -12.0, 4.0, 0.0]), SigOp('lift', [72.0, 48.0, 110.0, 92.0, -4.0, -12.0, 4.0, 0.0])],
-    fx: [SigOp('rings', [50.0, 74.0, 3.0, 5.0, 0.25, 0.9, 0.0]), SigOp('notes', [50.0, 28.0, 2.0, 2.4, 0.3, 0.95, 0.0])]),
-  DitherAnimalType.duck: SigSpec(6.0, 2.2, 80.0,
-    pose: [SigOp('tilt', [0.06, -1.0]), SigOp('hop', [2.0, 3.0, 0.05])],
-    warp: [SigOp('wave', [-10.0, 56.0, 32.0, 98.0, -2.0, -6.0, 13.0, 0.0, 2.0, 0.0]), SigOp('wave', [68.0, 56.0, 110.0, 98.0, 2.0, -6.0, 13.0, 0.0, 1.0, 0.0]), SigOp('lift', [34.0, 52.0, 66.0, 68.0, 0.0, 2.5, 3.0, 0.0])],
-    fx: [SigOp('rings', [50.0, 58.0, 3.0, 7.0, 0.25, 0.85, 0.0]), SigOp('bubbles', [50.0, 66.0, 3.0, 1.5, 0.3, 0.95, 0.0])]),
-  DitherAnimalType.sheep: SigSpec(8.0, 3.2, 81.0,
-    pose: [SigOp('tilt', [0.07, 4.0])],
-    warp: [SigOp('puff', [50.0, 56.0, 46.0, 2.5])],
-    fx: [SigOp('zzz', [68.0, 20.0, 3.0, 3.0, 0.25, 0.98, 0.0])]),
-  DitherAnimalType.hedgehog: SigSpec(8.0, 2.6, 82.0,
-    pose: [SigOp('spin', [1.0]), SigOp('puff', [1.08, 1.08])],
-    warp: [],
-    fx: [SigOp('dust', [50.0, 96.0, 8.0, 2.4, 0.1, 0.95, 26.0])]),
-  DitherAnimalType.koala: SigSpec(8.0, 3.0, 83.0,
-    pose: [SigOp('sway', [2.0, 3.0]), SigOp('tilt', [0.06, 1.0])],
-    warp: [],
-    fx: [SigOp('hearts', [50.0, 28.0, 4.0, 2.6, 0.25, 0.95, 0.0])]),
-  DitherAnimalType.raccoon: SigSpec(7.0, 3.0, 84.0,
-    pose: [SigOp('tilt', [0.0, 1.0])],
-    warp: [SigOp('lift', [18.0, 56.0, 82.0, 92.0, 0.0, -8.0, 4.0, 0.0]), SigOp('wave', [18.0, 56.0, 82.0, 92.0, 0.0, 3.0, 13.0, 0.0, 0.0, 0.0])],
-    fx: [SigOp('drops', [50.0, 66.0, 12.0, 1.5, 0.2, 0.9, 12.0])]),
-  DitherAnimalType.whale: SigSpec(8.0, 3.0, 85.0,
-    pose: [SigOp('rise', [3.0]), SigOp('tilt', [-0.05, 0.0])],
-    warp: [],
-    fx: [SigOp('drops', [58.0, 20.0, 22.0, 1.6, 0.25, 0.95, 7.0])]),
-  DitherAnimalType.bee: SigSpec(6.0, 2.8, 86.0,
-    pose: [SigOp('sway', [11.0, 5.5]), SigOp('hop', [3.0, 5.0, 0.0])],
-    warp: [SigOp('wave', [-10.0, -10.0, 36.0, 56.0, 0.0, 4.0, 13.0, 0.0, 0.0, 0.0]), SigOp('wave', [64.0, -10.0, 110.0, 56.0, 0.0, 4.0, 13.0, 0.0, 0.0, 0.0])],
-    fx: [SigOp('lines', [24.0, 56.0, 3.0, 4.0, 0.15, 0.9, 12.0])]),
-  DitherAnimalType.cow: SigSpec(7.5, 2.8, 87.0,
-    pose: [SigOp('tilt', [-0.05, 0.0])],
-    warp: [SigOp('lift', [8.0, 8.0, 92.0, 72.0, 0.0, -4.0, 4.0, 0.0])],
-    fx: [SigOp('rings', [50.0, 64.0, 3.0, 9.0, 0.3, 0.9, 0.0]), SigOp('notes', [74.0, 40.0, 2.0, 2.4, 0.3, 0.95, 0.0])]),
-  DitherAnimalType.giraffe: SigSpec(8.0, 3.0, 88.0,
-    pose: [SigOp('rise', [0.0])],
-    warp: [SigOp('lift', [-10.0, -10.0, 110.0, 64.0, 0.0, -12.0, 4.0, 0.0])],
-    fx: [SigOp('stars', [50.0, 10.0, 6.0, 2.4, 0.35, 0.95, 14.0])]),
-  DitherAnimalType.zebra: SigSpec(6.5, 2.6, 89.0,
-    pose: [SigOp('hop', [3.0, 4.0, 0.05])],
-    warp: [SigOp('wave', [64.0, 50.0, 110.0, 100.0, 0.0, 4.0, 12.0, 0.06, 1.0, 0.0])],
-    fx: [SigOp('dust', [50.0, 96.0, 8.0, 2.2, 0.1, 0.95, 28.0]), SigOp('lines', [24.0, 64.0, 3.0, 4.0, 0.3, 0.85, 12.0])]),
-  DitherAnimalType.crab: SigSpec(6.0, 2.8, 90.0,
-    pose: [SigOp('sway', [9.0, 6.5])],
-    warp: [SigOp('lift', [-10.0, -10.0, 32.0, 54.0, -2.0, -9.0, 4.0, 0.0]), SigOp('lift', [68.0, -10.0, 110.0, 54.0, 2.0, -9.0, 4.0, 0.0]), SigOp('wave', [-10.0, -10.0, 32.0, 54.0, 0.0, 3.0, 13.0, 0.0, 0.0, 0.0]), SigOp('wave', [68.0, -10.0, 110.0, 54.0, 0.0, 3.0, 13.0, 0.0, 0.0, 0.0])],
-    fx: [SigOp('bubbles', [50.0, 40.0, 4.0, 1.6, 0.2, 0.95, 0.0])]),
-  DitherAnimalType.flamingo: SigSpec(8.0, 3.2, 91.0,
-    pose: [SigOp('tilt', [0.1, 0.0])],
-    warp: [SigOp('wave', [36.0, -10.0, 110.0, 64.0, 4.0, 0.0, 5.0, 0.05, 4.0, 0.0])],
-    fx: [SigOp('hearts', [60.0, 14.0, 4.0, 2.6, 0.2, 0.95, 0.0])]),
-  DitherAnimalType.butterfly: SigSpec(6.0, 2.6, 92.0,
-    pose: [SigOp('rise', [12.0])],
-    warp: [SigOp('wave', [-10.0, 0.0, 44.0, 100.0, 6.0, -1.0, 13.0, 0.0, 2.0, 0.0]), SigOp('wave', [56.0, 0.0, 110.0, 100.0, -6.0, -1.0, 13.0, 0.0, 1.0, 0.0])],
-    fx: [SigOp('stars', [50.0, 50.0, 8.0, 2.2, 0.2, 0.95, 38.0])]),
-  DitherAnimalType.snail: SigSpec(9.0, 3.4, 93.0,
-    pose: [SigOp('sway', [5.0, 2.4])],
-    warp: [SigOp('lift', [66.0, -10.0, 110.0, 48.0, 0.0, -8.0, 4.0, 0.0])],
-    fx: [SigOp('bubbles', [20.0, 86.0, 4.0, 1.6, 0.2, 0.95, 0.0])]),
-  DitherAnimalType.squirrel: SigSpec(7.0, 2.4, 94.0,
-    pose: [SigOp('bounce', [5.0, 0.035])],
-    warp: [SigOp('puff', [24.0, 66.0, 26.0, 5.0])],
-    fx: [SigOp('stars', [24.0, 62.0, 5.0, 2.4, 0.3, 0.95, 20.0])]),
-  DitherAnimalType.hippo: SigSpec(8.0, 3.0, 95.0,
-    pose: [SigOp('puff', [1.04, 1.04])],
-    warp: [SigOp('lift', [24.0, 66.0, 76.0, 94.0, 0.0, 10.0, 3.0, 0.0]), SigOp('lift', [8.0, 8.0, 92.0, 62.0, 0.0, -4.0, 4.0, 0.0])],
-    fx: [SigOp('bubbles', [50.0, 82.0, 5.0, 1.8, 0.25, 0.95, 0.0])]),
-  DitherAnimalType.deer: SigSpec(7.0, 2.6, 96.0,
-    pose: [SigOp('hop', [2.0, 8.0, 0.04])],
-    warp: [SigOp('wave', [-10.0, -10.0, 36.0, 42.0, 0.0, -3.0, 13.0, 0.0, 4.0, 0.0]), SigOp('wave', [64.0, -10.0, 110.0, 42.0, 0.0, -3.0, 13.0, 0.0, 4.0, 0.0])],
-    fx: [SigOp('dust', [50.0, 96.0, 6.0, 2.2, 0.5, 0.98, 24.0])]),
-  DitherAnimalType.parrot: SigSpec(6.5, 2.8, 97.0,
-    pose: [SigOp('tilt', [0.1, 0.0]), SigOp('hop', [2.0, 2.0, 0.0])],
-    warp: [SigOp('wave', [-10.0, 20.0, 40.0, 100.0, -4.0, 0.0, 12.0, 0.0, 2.0, 0.0]), SigOp('wave', [60.0, 20.0, 110.0, 100.0, 4.0, 0.0, 12.0, 0.0, 1.0, 0.0])],
-    fx: [SigOp('notes', [50.0, 38.0, 4.0, 2.6, 0.25, 0.95, 0.0])]),
-  DitherAnimalType.kangaroo: SigSpec(7.0, 2.4, 98.0,
-    pose: [SigOp('hop', [2.0, 14.0, 0.0])],
-    warp: [SigOp('wave', [66.0, 56.0, 110.0, 100.0, 5.0, -4.0, 8.0, 0.0, 1.0, 0.0])],
-    fx: [SigOp('dust', [50.0, 96.0, 8.0, 2.4, 0.1, 0.98, 28.0])]),
-  DitherAnimalType.shark: SigSpec(7.0, 2.4, 99.0,
-    pose: [SigOp('dash', [16.0, 0.05])],
-    warp: [SigOp('lift', [24.0, 62.0, 76.0, 94.0, 0.0, 7.0, 3.0, 0.0])],
-    fx: [SigOp('bubbles', [70.0, 56.0, 5.0, 1.8, 0.2, 0.95, 0.0]), SigOp('lines', [30.0, 60.0, 4.0, 4.0, 0.25, 0.8, 14.0])]),
-  DitherAnimalType.chicken: SigSpec(6.0, 2.4, 100.0,
-    pose: [SigOp('hop', [2.0, 5.0, 0.0])],
-    warp: [SigOp('wave', [-10.0, 20.0, 40.0, 100.0, -3.0, -6.0, 13.0, 0.0, 2.0, 0.0]), SigOp('wave', [60.0, 20.0, 110.0, 100.0, 3.0, -6.0, 13.0, 0.0, 1.0, 0.0])],
-    fx: [SigOp('stars', [50.0, 40.0, 6.0, 2.2, 0.2, 0.9, 30.0])]),
-  DitherAnimalType.ladybug: SigSpec(6.5, 2.6, 102.0,
-    pose: [SigOp('rise', [12.0])],
-    warp: [SigOp('puff', [50.0, 62.0, 42.0, 4.0]), SigOp('wave', [-10.0, 20.0, 40.0, 100.0, -2.0, -2.0, 13.0, 0.0, 2.0, 0.0]), SigOp('wave', [60.0, 20.0, 110.0, 100.0, 2.0, -2.0, 13.0, 0.0, 1.0, 0.0])],
-    fx: [SigOp('stars', [50.0, 50.0, 7.0, 2.2, 0.2, 0.95, 40.0])]),
-  DitherAnimalType.wolf: SigSpec(9.0, 3.4, 103.0,
-    pose: [SigOp('rear', [0.1, 0.03])],
-    warp: [SigOp('lift', [-10.0, -10.0, 110.0, 66.0, 0.0, -6.0, 4.0, 0.0])],
-    fx: [SigOp('moon', [82.0, 14.0, 1.0, 7.0, 0.15, 0.98, 0.0]), SigOp('rings', [52.0, 56.0, 3.0, 9.0, 0.3, 0.9, 0.0])]),
-  DitherAnimalType.horse: SigSpec(8.0, 2.8, 104.0,
-    pose: [SigOp('rear', [0.22, 0.05])],
-    warp: [SigOp('wave', [54.0, -10.0, 110.0, 56.0, 3.0, 0.0, 12.0, 0.0, 3.0, 0.0])],
-    fx: [SigOp('dust', [50.0, 96.0, 8.0, 2.4, 0.5, 0.98, 26.0])]),
-  DitherAnimalType.camel: SigSpec(8.0, 2.8, 105.0,
-    pose: [SigOp('tilt', [-0.07, 0.0])],
-    warp: [SigOp('lift', [8.0, 8.0, 92.0, 60.0, 0.0, -3.0, 4.0, 0.0])],
-    fx: [SigOp('drops', [62.0, 66.0, 8.0, 1.6, 0.35, 0.9, 16.0])]),
-  DitherAnimalType.rhino: SigSpec(8.0, 2.6, 106.0,
-    pose: [SigOp('crouch', [1.5, 0.04]), SigOp('dash', [16.0, 0.04])],
-    warp: [],
-    fx: [SigOp('dust', [30.0, 96.0, 8.0, 2.4, 0.3, 0.98, 26.0]), SigOp('lines', [30.0, 60.0, 4.0, 4.0, 0.3, 0.85, 14.0])]),
-  DitherAnimalType.goat: SigSpec(7.0, 2.4, 107.0,
-    pose: [SigOp('dash', [12.0, 0.12])],
-    warp: [],
-    fx: [SigOp('stars', [78.0, 36.0, 6.0, 2.4, 0.35, 0.9, 10.0])]),
-  DitherAnimalType.seal: SigSpec(7.0, 2.8, 108.0,
-    pose: [SigOp('bounce', [4.0, 0.04])],
-    warp: [SigOp('lift', [-10.0, 64.0, 34.0, 96.0, -9.0, -2.0, 0.0, 0.0]), SigOp('lift', [66.0, 64.0, 110.0, 96.0, 9.0, -2.0, 0.0, 0.0])],
-    fx: [SigOp('stars', [50.0, 80.0, 6.0, 2.4, 0.25, 0.95, 14.0])]),
-  DitherAnimalType.bat: SigSpec(7.0, 2.8, 109.0,
-    pose: [SigOp('rise', [6.0])],
-    warp: [SigOp('wave', [-10.0, 20.0, 36.0, 100.0, 0.0, 6.0, 13.0, 0.0, 2.0, 1.0]), SigOp('wave', [64.0, 20.0, 110.0, 100.0, 0.0, 6.0, 13.0, 0.0, 1.0, 1.0])],
-    fx: [SigOp('rings', [50.0, 40.0, 3.0, 11.0, 0.2, 0.95, 0.0])]),
-  DitherAnimalType.crocodile: SigSpec(7.0, 2.6, 110.0,
-    pose: [SigOp('puff', [1.03, 1.03])],
-    warp: [SigOp('lift', [24.0, 62.0, 76.0, 92.0, 0.0, 9.0, 3.0, 0.0])],
-    fx: [SigOp('stars', [50.0, 80.0, 6.0, 2.4, 0.5, 0.95, 14.0])]),
-  DitherAnimalType.jellyfish: SigSpec(8.0, 3.2, 111.0,
-    pose: [SigOp('rise', [12.0]), SigOp('puff', [1.06, 0.94])],
-    warp: [SigOp('wave', [-10.0, 56.0, 110.0, 110.0, 0.0, 5.0, 13.0, 0.1, 3.0, 0.0])],
-    fx: [SigOp('rings', [50.0, 38.0, 3.0, 12.0, 0.15, 0.95, 0.0]), SigOp('stars', [50.0, 44.0, 6.0, 2.0, 0.2, 0.95, 32.0])]),
-  DitherAnimalType.peacock: SigSpec(9.0, 3.6, 112.0,
-    pose: [SigOp('puff', [1.04, 1.04])],
-    warp: [SigOp('puff', [50.0, 50.0, 52.0, 6.0])],
-    fx: [SigOp('stars', [50.0, 50.0, 10.0, 2.4, 0.25, 0.98, 38.0])]),
-  DitherAnimalType.redpanda: SigSpec(8.0, 3.0, 113.0,
-    pose: [SigOp('rear', [0.1, 0.04])],
-    warp: [SigOp('wave', [60.0, 40.0, 110.0, 100.0, 8.0, 0.0, 8.0, 0.05, 1.0, 0.0])],
-    fx: [SigOp('hearts', [50.0, 28.0, 4.0, 2.4, 0.3, 0.95, 0.0])]),
+  DitherAnimalType.penguin: SigSpec(7.0, 2.6, 71.0, pose: [
+    SigOp('hop', [2.0, 5.0, 0.12])
+  ], warp: [
+    SigOp('wave', [-10.0, 48.0, 28.0, 92.0, -4.0, -6.0, 13.0, 0.0, 4.0, 0.0]),
+    SigOp('wave', [72.0, 48.0, 110.0, 92.0, 4.0, -6.0, 13.0, 0.0, 4.0, 0.0])
+  ], fx: [
+    SigOp('dust', [50.0, 96.0, 6.0, 2.0, 0.1, 0.9, 22.0]),
+    SigOp('stars', [50.0, 40.0, 6.0, 2.4, 0.25, 0.95, 24.0])
+  ]),
+  DitherAnimalType.frog: SigSpec(6.5, 2.6, 72.0, pose: [
+    SigOp('crouch', [3.0, 0.08]),
+    SigOp('hop', [1.0, 6.0, 0.0])
+  ], warp: [
+    SigOp('puff', [50.0, 70.0, 24.0, 3.0])
+  ], fx: [
+    SigOp('tongue', [60.0, 62.0, 1.0, 3.0, 0.35, 0.6, 36.0])
+  ]),
+  DitherAnimalType.octopus: SigSpec(7.5, 2.6, 73.0, pose: [
+    SigOp('dash', [-12.0, 0.05]),
+    SigOp('puff', [0.94, 1.06])
+  ], warp: [
+    SigOp('wave', [-10.0, 60.0, 110.0, 110.0, 0.0, 5.0, 13.0, 0.1, 3.0, 0.0])
+  ], fx: [
+    SigOp('cloud', [72.0, 70.0, 7.0, 6.0, 0.22, 0.95, 14.0])
+  ]),
+  DitherAnimalType.bear: SigSpec(7.0, 3.0, 74.0, pose: [
+    SigOp('shake', [18.0, 0.045])
+  ], warp: [
+    SigOp('wave', [-10.0, -10.0, 36.0, 42.0, 0.0, -2.0, 13.0, 0.0, 4.0, 0.0]),
+    SigOp('wave', [64.0, -10.0, 110.0, 42.0, 0.0, -2.0, 13.0, 0.0, 4.0, 0.0])
+  ], fx: [
+    SigOp('orbit', [50.0, 22.0, 4.0, 1.7, 0.1, 0.95, 34.0])
+  ]),
+  DitherAnimalType.tiger: SigSpec(7.5, 2.4, 75.0, pose: [
+    SigOp('crouch', [4.0, 0.08]),
+    SigOp('dash', [12.0, 0.06])
+  ], warp: [
+    SigOp('wave', [64.0, 50.0, 110.0, 100.0, 0.0, 7.0, 12.0, 0.06, 1.0, 0.0])
+  ], fx: [
+    SigOp('lines', [30.0, 60.0, 4.0, 4.0, 0.25, 0.8, 14.0])
+  ]),
+  DitherAnimalType.dog: SigSpec(6.0, 2.4, 76.0, pose: [
+    SigOp('hop', [2.0, 3.0, 0.04])
+  ], warp: [
+    SigOp('wave', [66.0, 56.0, 110.0, 100.0, 8.0, 0.0, 13.0, 0.0, 1.0, 0.0])
+  ], fx: [
+    SigOp('rings', [62.0, 60.0, 3.0, 7.0, 0.2, 0.85, 0.0])
+  ]),
+  DitherAnimalType.panda: SigSpec(8.0, 2.8, 77.0, pose: [
+    SigOp('spin', [1.0])
+  ], warp: [], fx: [
+    SigOp('dust', [50.0, 96.0, 8.0, 2.4, 0.1, 0.95, 26.0])
+  ]),
+  DitherAnimalType.mouse: SigSpec(6.5, 2.2, 101.0, pose: [
+    SigOp('bounce', [4.0, 0.04])
+  ], warp: [
+    SigOp('wave', [-10.0, -10.0, 36.0, 42.0, 0.0, -3.0, 13.0, 0.0, 4.0, 0.0]),
+    SigOp('wave', [64.0, -10.0, 110.0, 42.0, 0.0, -3.0, 13.0, 0.0, 4.0, 0.0]),
+    SigOp('wave', [64.0, 50.0, 110.0, 100.0, 0.0, 6.0, 10.0, 0.08, 1.0, 0.0])
+  ], fx: [
+    SigOp('rings', [50.0, 62.0, 3.0, 4.0, 0.25, 0.85, 0.0]),
+    SigOp('hearts', [50.0, 28.0, 2.0, 2.2, 0.45, 0.95, 0.0])
+  ]),
+  DitherAnimalType.fox: SigSpec(7.0, 2.4, 78.0, pose: [
+    SigOp('hop', [1.0, 14.0, 0.3])
+  ], warp: [
+    SigOp('wave', [66.0, 44.0, 110.0, 100.0, 6.0, -2.0, 10.0, 0.05, 1.0, 0.0])
+  ], fx: [
+    SigOp('dust', [50.0, 96.0, 7.0, 2.4, 0.5, 0.98, 24.0])
+  ]),
+  DitherAnimalType.monkey: SigSpec(6.5, 2.6, 79.0, pose: [
+    SigOp('hop', [2.0, 4.0, 0.05])
+  ], warp: [
+    SigOp('lift', [-10.0, 48.0, 28.0, 92.0, 4.0, -12.0, 4.0, 0.0]),
+    SigOp('lift', [72.0, 48.0, 110.0, 92.0, -4.0, -12.0, 4.0, 0.0])
+  ], fx: [
+    SigOp('rings', [50.0, 74.0, 3.0, 5.0, 0.25, 0.9, 0.0]),
+    SigOp('notes', [50.0, 28.0, 2.0, 2.4, 0.3, 0.95, 0.0])
+  ]),
+  DitherAnimalType.duck: SigSpec(6.0, 2.2, 80.0, pose: [
+    SigOp('tilt', [0.06, -1.0]),
+    SigOp('hop', [2.0, 3.0, 0.05])
+  ], warp: [
+    SigOp('wave', [-10.0, 56.0, 32.0, 98.0, -2.0, -6.0, 13.0, 0.0, 2.0, 0.0]),
+    SigOp('wave', [68.0, 56.0, 110.0, 98.0, 2.0, -6.0, 13.0, 0.0, 1.0, 0.0]),
+    SigOp('lift', [34.0, 52.0, 66.0, 68.0, 0.0, 2.5, 3.0, 0.0])
+  ], fx: [
+    SigOp('rings', [50.0, 58.0, 3.0, 7.0, 0.25, 0.85, 0.0]),
+    SigOp('bubbles', [50.0, 66.0, 3.0, 1.5, 0.3, 0.95, 0.0])
+  ]),
+  DitherAnimalType.sheep: SigSpec(8.0, 3.2, 81.0, pose: [
+    SigOp('tilt', [0.07, 4.0])
+  ], warp: [
+    SigOp('puff', [50.0, 56.0, 46.0, 2.5])
+  ], fx: [
+    SigOp('zzz', [68.0, 20.0, 3.0, 3.0, 0.25, 0.98, 0.0])
+  ]),
+  DitherAnimalType.hedgehog: SigSpec(8.0, 2.6, 82.0, pose: [
+    SigOp('spin', [1.0]),
+    SigOp('puff', [1.08, 1.08])
+  ], warp: [], fx: [
+    SigOp('dust', [50.0, 96.0, 8.0, 2.4, 0.1, 0.95, 26.0])
+  ]),
+  DitherAnimalType.koala: SigSpec(8.0, 3.0, 83.0, pose: [
+    SigOp('sway', [2.0, 3.0]),
+    SigOp('tilt', [0.06, 1.0])
+  ], warp: [], fx: [
+    SigOp('hearts', [50.0, 28.0, 4.0, 2.6, 0.25, 0.95, 0.0])
+  ]),
+  DitherAnimalType.raccoon: SigSpec(7.0, 3.0, 84.0, pose: [
+    SigOp('tilt', [0.0, 1.0])
+  ], warp: [
+    SigOp('lift', [18.0, 56.0, 82.0, 92.0, 0.0, -8.0, 4.0, 0.0]),
+    SigOp('wave', [18.0, 56.0, 82.0, 92.0, 0.0, 3.0, 13.0, 0.0, 0.0, 0.0])
+  ], fx: [
+    SigOp('drops', [50.0, 66.0, 12.0, 1.5, 0.2, 0.9, 12.0])
+  ]),
+  DitherAnimalType.whale: SigSpec(8.0, 3.0, 85.0, pose: [
+    SigOp('rise', [3.0]),
+    SigOp('tilt', [-0.05, 0.0])
+  ], warp: [], fx: [
+    SigOp('drops', [58.0, 20.0, 22.0, 1.6, 0.25, 0.95, 7.0])
+  ]),
+  DitherAnimalType.bee: SigSpec(6.0, 2.8, 86.0, pose: [
+    SigOp('sway', [11.0, 5.5]),
+    SigOp('hop', [3.0, 5.0, 0.0])
+  ], warp: [
+    SigOp('wave', [-10.0, -10.0, 36.0, 56.0, 0.0, 4.0, 13.0, 0.0, 0.0, 0.0]),
+    SigOp('wave', [64.0, -10.0, 110.0, 56.0, 0.0, 4.0, 13.0, 0.0, 0.0, 0.0])
+  ], fx: [
+    SigOp('lines', [24.0, 56.0, 3.0, 4.0, 0.15, 0.9, 12.0])
+  ]),
+  DitherAnimalType.cow: SigSpec(7.5, 2.8, 87.0, pose: [
+    SigOp('tilt', [-0.05, 0.0])
+  ], warp: [
+    SigOp('lift', [8.0, 8.0, 92.0, 72.0, 0.0, -4.0, 4.0, 0.0])
+  ], fx: [
+    SigOp('rings', [50.0, 64.0, 3.0, 9.0, 0.3, 0.9, 0.0]),
+    SigOp('notes', [74.0, 40.0, 2.0, 2.4, 0.3, 0.95, 0.0])
+  ]),
+  DitherAnimalType.giraffe: SigSpec(8.0, 3.0, 88.0, pose: [
+    SigOp('rise', [0.0])
+  ], warp: [
+    SigOp('lift', [-10.0, -10.0, 110.0, 64.0, 0.0, -12.0, 4.0, 0.0])
+  ], fx: [
+    SigOp('stars', [50.0, 10.0, 6.0, 2.4, 0.35, 0.95, 14.0])
+  ]),
+  DitherAnimalType.zebra: SigSpec(6.5, 2.6, 89.0, pose: [
+    SigOp('hop', [3.0, 4.0, 0.05])
+  ], warp: [
+    SigOp('wave', [64.0, 50.0, 110.0, 100.0, 0.0, 4.0, 12.0, 0.06, 1.0, 0.0])
+  ], fx: [
+    SigOp('dust', [50.0, 96.0, 8.0, 2.2, 0.1, 0.95, 28.0]),
+    SigOp('lines', [24.0, 64.0, 3.0, 4.0, 0.3, 0.85, 12.0])
+  ]),
+  DitherAnimalType.crab: SigSpec(6.0, 2.8, 90.0, pose: [
+    SigOp('sway', [9.0, 6.5])
+  ], warp: [
+    SigOp('lift', [-10.0, -10.0, 32.0, 54.0, -2.0, -9.0, 4.0, 0.0]),
+    SigOp('lift', [68.0, -10.0, 110.0, 54.0, 2.0, -9.0, 4.0, 0.0]),
+    SigOp('wave', [-10.0, -10.0, 32.0, 54.0, 0.0, 3.0, 13.0, 0.0, 0.0, 0.0]),
+    SigOp('wave', [68.0, -10.0, 110.0, 54.0, 0.0, 3.0, 13.0, 0.0, 0.0, 0.0])
+  ], fx: [
+    SigOp('bubbles', [50.0, 40.0, 4.0, 1.6, 0.2, 0.95, 0.0])
+  ]),
+  DitherAnimalType.flamingo: SigSpec(8.0, 3.2, 91.0, pose: [
+    SigOp('tilt', [0.1, 0.0])
+  ], warp: [
+    SigOp('wave', [36.0, -10.0, 110.0, 64.0, 4.0, 0.0, 5.0, 0.05, 4.0, 0.0])
+  ], fx: [
+    SigOp('hearts', [60.0, 14.0, 4.0, 2.6, 0.2, 0.95, 0.0])
+  ]),
+  DitherAnimalType.butterfly: SigSpec(6.0, 2.6, 92.0, pose: [
+    SigOp('rise', [12.0])
+  ], warp: [
+    SigOp('wave', [-10.0, 0.0, 44.0, 100.0, 6.0, -1.0, 13.0, 0.0, 2.0, 0.0]),
+    SigOp('wave', [56.0, 0.0, 110.0, 100.0, -6.0, -1.0, 13.0, 0.0, 1.0, 0.0])
+  ], fx: [
+    SigOp('stars', [50.0, 50.0, 8.0, 2.2, 0.2, 0.95, 38.0])
+  ]),
+  DitherAnimalType.snail: SigSpec(9.0, 3.4, 93.0, pose: [
+    SigOp('sway', [5.0, 2.4])
+  ], warp: [
+    SigOp('lift', [66.0, -10.0, 110.0, 48.0, 0.0, -8.0, 4.0, 0.0])
+  ], fx: [
+    SigOp('bubbles', [20.0, 86.0, 4.0, 1.6, 0.2, 0.95, 0.0])
+  ]),
+  DitherAnimalType.squirrel: SigSpec(7.0, 2.4, 94.0, pose: [
+    SigOp('bounce', [5.0, 0.035])
+  ], warp: [
+    SigOp('puff', [24.0, 66.0, 26.0, 5.0])
+  ], fx: [
+    SigOp('stars', [24.0, 62.0, 5.0, 2.4, 0.3, 0.95, 20.0])
+  ]),
+  DitherAnimalType.hippo: SigSpec(8.0, 3.0, 95.0, pose: [
+    SigOp('puff', [1.04, 1.04])
+  ], warp: [
+    SigOp('lift', [24.0, 66.0, 76.0, 94.0, 0.0, 10.0, 3.0, 0.0]),
+    SigOp('lift', [8.0, 8.0, 92.0, 62.0, 0.0, -4.0, 4.0, 0.0])
+  ], fx: [
+    SigOp('bubbles', [50.0, 82.0, 5.0, 1.8, 0.25, 0.95, 0.0])
+  ]),
+  DitherAnimalType.deer: SigSpec(7.0, 2.6, 96.0, pose: [
+    SigOp('hop', [2.0, 8.0, 0.04])
+  ], warp: [
+    SigOp('wave', [-10.0, -10.0, 36.0, 42.0, 0.0, -3.0, 13.0, 0.0, 4.0, 0.0]),
+    SigOp('wave', [64.0, -10.0, 110.0, 42.0, 0.0, -3.0, 13.0, 0.0, 4.0, 0.0])
+  ], fx: [
+    SigOp('dust', [50.0, 96.0, 6.0, 2.2, 0.5, 0.98, 24.0])
+  ]),
+  DitherAnimalType.parrot: SigSpec(6.5, 2.8, 97.0, pose: [
+    SigOp('tilt', [0.1, 0.0]),
+    SigOp('hop', [2.0, 2.0, 0.0])
+  ], warp: [
+    SigOp('wave', [-10.0, 20.0, 40.0, 100.0, -4.0, 0.0, 12.0, 0.0, 2.0, 0.0]),
+    SigOp('wave', [60.0, 20.0, 110.0, 100.0, 4.0, 0.0, 12.0, 0.0, 1.0, 0.0])
+  ], fx: [
+    SigOp('notes', [50.0, 38.0, 4.0, 2.6, 0.25, 0.95, 0.0])
+  ]),
+  DitherAnimalType.kangaroo: SigSpec(7.0, 2.4, 98.0, pose: [
+    SigOp('hop', [2.0, 14.0, 0.0])
+  ], warp: [
+    SigOp('wave', [66.0, 56.0, 110.0, 100.0, 5.0, -4.0, 8.0, 0.0, 1.0, 0.0])
+  ], fx: [
+    SigOp('dust', [50.0, 96.0, 8.0, 2.4, 0.1, 0.98, 28.0])
+  ]),
+  DitherAnimalType.shark: SigSpec(7.0, 2.4, 99.0, pose: [
+    SigOp('dash', [16.0, 0.05])
+  ], warp: [
+    SigOp('lift', [24.0, 62.0, 76.0, 94.0, 0.0, 7.0, 3.0, 0.0])
+  ], fx: [
+    SigOp('bubbles', [70.0, 56.0, 5.0, 1.8, 0.2, 0.95, 0.0]),
+    SigOp('lines', [30.0, 60.0, 4.0, 4.0, 0.25, 0.8, 14.0])
+  ]),
+  DitherAnimalType.chicken: SigSpec(6.0, 2.4, 100.0, pose: [
+    SigOp('hop', [2.0, 5.0, 0.0])
+  ], warp: [
+    SigOp('wave', [-10.0, 20.0, 40.0, 100.0, -3.0, -6.0, 13.0, 0.0, 2.0, 0.0]),
+    SigOp('wave', [60.0, 20.0, 110.0, 100.0, 3.0, -6.0, 13.0, 0.0, 1.0, 0.0])
+  ], fx: [
+    SigOp('stars', [50.0, 40.0, 6.0, 2.2, 0.2, 0.9, 30.0])
+  ]),
+  DitherAnimalType.ladybug: SigSpec(6.5, 2.6, 102.0, pose: [
+    SigOp('rise', [12.0])
+  ], warp: [
+    SigOp('puff', [50.0, 62.0, 42.0, 4.0]),
+    SigOp('wave', [-10.0, 20.0, 40.0, 100.0, -2.0, -2.0, 13.0, 0.0, 2.0, 0.0]),
+    SigOp('wave', [60.0, 20.0, 110.0, 100.0, 2.0, -2.0, 13.0, 0.0, 1.0, 0.0])
+  ], fx: [
+    SigOp('stars', [50.0, 50.0, 7.0, 2.2, 0.2, 0.95, 40.0])
+  ]),
+  DitherAnimalType.wolf: SigSpec(9.0, 3.4, 103.0, pose: [
+    SigOp('rear', [0.1, 0.03])
+  ], warp: [
+    SigOp('lift', [-10.0, -10.0, 110.0, 66.0, 0.0, -6.0, 4.0, 0.0])
+  ], fx: [
+    SigOp('moon', [82.0, 14.0, 1.0, 7.0, 0.15, 0.98, 0.0]),
+    SigOp('rings', [52.0, 56.0, 3.0, 9.0, 0.3, 0.9, 0.0])
+  ]),
+  DitherAnimalType.horse: SigSpec(8.0, 2.8, 104.0, pose: [
+    SigOp('rear', [0.22, 0.05])
+  ], warp: [
+    SigOp('wave', [54.0, -10.0, 110.0, 56.0, 3.0, 0.0, 12.0, 0.0, 3.0, 0.0])
+  ], fx: [
+    SigOp('dust', [50.0, 96.0, 8.0, 2.4, 0.5, 0.98, 26.0])
+  ]),
+  DitherAnimalType.camel: SigSpec(8.0, 2.8, 105.0, pose: [
+    SigOp('tilt', [-0.07, 0.0])
+  ], warp: [
+    SigOp('lift', [8.0, 8.0, 92.0, 60.0, 0.0, -3.0, 4.0, 0.0])
+  ], fx: [
+    SigOp('drops', [62.0, 66.0, 8.0, 1.6, 0.35, 0.9, 16.0])
+  ]),
+  DitherAnimalType.rhino: SigSpec(8.0, 2.6, 106.0, pose: [
+    SigOp('crouch', [1.5, 0.04]),
+    SigOp('dash', [16.0, 0.04])
+  ], warp: [], fx: [
+    SigOp('dust', [30.0, 96.0, 8.0, 2.4, 0.3, 0.98, 26.0]),
+    SigOp('lines', [30.0, 60.0, 4.0, 4.0, 0.3, 0.85, 14.0])
+  ]),
+  DitherAnimalType.goat: SigSpec(7.0, 2.4, 107.0, pose: [
+    SigOp('dash', [12.0, 0.12])
+  ], warp: [], fx: [
+    SigOp('stars', [78.0, 36.0, 6.0, 2.4, 0.35, 0.9, 10.0])
+  ]),
+  DitherAnimalType.seal: SigSpec(7.0, 2.8, 108.0, pose: [
+    SigOp('bounce', [4.0, 0.04])
+  ], warp: [
+    SigOp('lift', [-10.0, 64.0, 34.0, 96.0, -9.0, -2.0, 0.0, 0.0]),
+    SigOp('lift', [66.0, 64.0, 110.0, 96.0, 9.0, -2.0, 0.0, 0.0])
+  ], fx: [
+    SigOp('stars', [50.0, 80.0, 6.0, 2.4, 0.25, 0.95, 14.0])
+  ]),
+  DitherAnimalType.bat: SigSpec(7.0, 2.8, 109.0, pose: [
+    SigOp('rise', [6.0])
+  ], warp: [
+    SigOp('wave', [-10.0, 20.0, 36.0, 100.0, 0.0, 6.0, 13.0, 0.0, 2.0, 1.0]),
+    SigOp('wave', [64.0, 20.0, 110.0, 100.0, 0.0, 6.0, 13.0, 0.0, 1.0, 1.0])
+  ], fx: [
+    SigOp('rings', [50.0, 40.0, 3.0, 11.0, 0.2, 0.95, 0.0])
+  ]),
+  DitherAnimalType.crocodile: SigSpec(7.0, 2.6, 110.0, pose: [
+    SigOp('puff', [1.03, 1.03])
+  ], warp: [
+    SigOp('lift', [24.0, 62.0, 76.0, 92.0, 0.0, 9.0, 3.0, 0.0])
+  ], fx: [
+    SigOp('stars', [50.0, 80.0, 6.0, 2.4, 0.5, 0.95, 14.0])
+  ]),
+  DitherAnimalType.jellyfish: SigSpec(8.0, 3.2, 111.0, pose: [
+    SigOp('rise', [12.0]),
+    SigOp('puff', [1.06, 0.94])
+  ], warp: [
+    SigOp('wave', [-10.0, 56.0, 110.0, 110.0, 0.0, 5.0, 13.0, 0.1, 3.0, 0.0])
+  ], fx: [
+    SigOp('rings', [50.0, 38.0, 3.0, 12.0, 0.15, 0.95, 0.0]),
+    SigOp('stars', [50.0, 44.0, 6.0, 2.0, 0.2, 0.95, 32.0])
+  ]),
+  DitherAnimalType.peacock: SigSpec(9.0, 3.6, 112.0, pose: [
+    SigOp('puff', [1.04, 1.04])
+  ], warp: [
+    SigOp('puff', [50.0, 50.0, 52.0, 6.0])
+  ], fx: [
+    SigOp('stars', [50.0, 50.0, 10.0, 2.4, 0.25, 0.98, 38.0])
+  ]),
+  DitherAnimalType.redpanda: SigSpec(8.0, 3.0, 113.0, pose: [
+    SigOp('rear', [0.1, 0.04])
+  ], warp: [
+    SigOp('wave', [60.0, 40.0, 110.0, 100.0, 8.0, 0.0, 8.0, 0.05, 1.0, 0.0])
+  ], fx: [
+    SigOp('hearts', [50.0, 28.0, 4.0, 2.4, 0.3, 0.95, 0.0])
+  ]),
 };

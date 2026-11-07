@@ -25,7 +25,8 @@ class _Spec {
 
 const _specs = [
   _Spec(DitherAnimalType.owl, Color(0xFFFF5A1F), '01 Owl · head swivel'),
-  _Spec(DitherAnimalType.elephant, Color(0xFF0A2BE0), '02 Elephant · water spray'),
+  _Spec(DitherAnimalType.elephant, Color(0xFF0A2BE0),
+      '02 Elephant · water spray'),
   _Spec(DitherAnimalType.rabbit, Color(0xFF7B2FF7), '03 Rabbit · binky hop'),
   _Spec(DitherAnimalType.fish, Color(0xFFE6197A), '04 Fish · speed dart'),
   _Spec(DitherAnimalType.turtle, Color(0xFF16A37F), '05 Turtle · shell hide'),
@@ -49,13 +50,17 @@ const _specs = [
   _Spec(DitherAnimalType.whale, Color(0xFF0EA5E9), '23 Whale · spouts'),
   _Spec(DitherAnimalType.bee, Color(0xFFCA8A04), '24 Bee · buzzes'),
   _Spec(DitherAnimalType.cow, Color(0xFF334155), '25 Cow · chews & nods'),
-  _Spec(DitherAnimalType.giraffe, Color(0xFFD97706), '26 Giraffe · graceful sway'),
+  _Spec(DitherAnimalType.giraffe, Color(0xFFD97706),
+      '26 Giraffe · graceful sway'),
   _Spec(DitherAnimalType.zebra, Color(0xFF111827), '27 Zebra · gallops'),
   _Spec(DitherAnimalType.crab, Color(0xFFDC2626), '28 Crab · scuttles'),
-  _Spec(DitherAnimalType.flamingo, Color(0xFFF43F5E), '29 Flamingo · neck ribbon'),
-  _Spec(DitherAnimalType.butterfly, Color(0xFF2563EB), '30 Butterfly · flutters'),
+  _Spec(DitherAnimalType.flamingo, Color(0xFFF43F5E),
+      '29 Flamingo · neck ribbon'),
+  _Spec(
+      DitherAnimalType.butterfly, Color(0xFF2563EB), '30 Butterfly · flutters'),
   _Spec(DitherAnimalType.snail, Color(0xFFA0623A), '31 Snail · glides'),
-  _Spec(DitherAnimalType.squirrel, Color(0xFFB5541C), '32 Squirrel · tail sweep'),
+  _Spec(
+      DitherAnimalType.squirrel, Color(0xFFB5541C), '32 Squirrel · tail sweep'),
   _Spec(DitherAnimalType.hippo, Color(0xFF6F85A6), '33 Hippo · yawns'),
   _Spec(DitherAnimalType.deer, Color(0xFF9C6B3C), '34 Deer · bounds'),
   _Spec(DitherAnimalType.parrot, Color(0xFF1F6FEB), '35 Parrot · flutters'),
@@ -73,7 +78,8 @@ const _specs = [
   _Spec(DitherAnimalType.crocodile, Color(0xFF3C8D40), '47 Crocodile · snaps'),
   _Spec(DitherAnimalType.jellyfish, Color(0xFFD36BC4), '48 Jellyfish · pulses'),
   _Spec(DitherAnimalType.peacock, Color(0xFF0E8A8A), '49 Peacock · fans tail'),
-  _Spec(DitherAnimalType.redpanda, Color(0xFFC2410C), '50 Red panda · tail ripple'),
+  _Spec(DitherAnimalType.redpanda, Color(0xFFC2410C),
+      '50 Red panda · tail ripple'),
 ];
 
 class DemoPage extends StatefulWidget {
@@ -95,106 +101,121 @@ class _DemoPageState extends State<DemoPage> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: ThemeData(
-          useMaterial3: true,
-          brightness: _dark ? Brightness.dark : Brightness.light),
-      child: Scaffold(
-      backgroundColor: _dark ? const Color(0xFF0B0F1A) : const Color(0xFFE4E4E6),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'The Anatomy of\nAdaptation',
-                style: TextStyle(
-                    fontSize: 30, height: 1.1, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 8),
-              const Text('A visual study of how life evolves,\nadapts, and thrives.',
-                  style: TextStyle(fontSize: 13, color: Colors.grey)),
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Signature moves'),
-                subtitle: const Text('Roar, spray, pounce... one special trick per animal'),
-                value: _signature,
-                onChanged: (v) => setState(() => _signature = v),
-              ),
-              SegmentedButton<DitherDot>(
-                showSelectedIcon: false,
-                segments: const [
-                  ButtonSegment(value: DitherDot.square, label: Text('Square')),
-                  ButtonSegment(value: DitherDot.round, label: Text('Round')),
-                  ButtonSegment(value: DitherDot.hex, label: Text('Hex')),
-                  ButtonSegment(value: DitherDot.diamond, label: Text('Diamond')),
-                ],
-                selected: {_dot},
-                onSelectionChanged: (v) => setState(() => _dot = v.first),
-              ),
-              const SizedBox(height: 8),
-              SegmentedButton<DitherColorMode>(
-                showSelectedIcon: false,
-                segments: const [
-                  ButtonSegment(value: DitherColorMode.solid, label: Text('Solid')),
-                  ButtonSegment(value: DitherColorMode.twoTone, label: Text('Two-tone')),
-                  ButtonSegment(value: DitherColorMode.gradient, label: Text('Gradient')),
-                ],
-                selected: {_mode},
-                onSelectionChanged: (v) => setState(() => _mode = v.first),
-              ),
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Dark mode'),
-                value: _dark,
-                onChanged: (v) => setState(() => _dark = v),
-              ),
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Auto mood (all animals)'),
-                subtitle: const Text('Facial expressions that change on their own'),
-                value: _autoMood,
-                onChanged: (v) => setState(() => _autoMood = v),
-              ),
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Haptics'),
-                subtitle: const Text('Buzz on form, signature moves and taps'),
-                value: _haptics,
-                onChanged: (v) => setState(() => _haptics = v),
-              ),
-              const Text('Tap the tune icon on any card to open its full studio',
-                  style: TextStyle(fontSize: 12, color: Colors.black45)),
-              const SizedBox(height: 12),
-              Wrap(
-                spacing: 14,
-                runSpacing: 14,
+        data: ThemeData(
+            useMaterial3: true,
+            brightness: _dark ? Brightness.dark : Brightness.light),
+        child: Scaffold(
+          backgroundColor:
+              _dark ? const Color(0xFF0B0F1A) : const Color(0xFFE4E4E6),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  for (var i = 0; i < _specs.length; i++)
-                    GestureDetector(
-                      onLongPress: () => setState(() => _replay++),
-                      child: _AnimalCard(
-                        key: ValueKey('$i-$_replay'),
-                        spec: _specs[i],
-                        signature: _signature,
-                        dot: _dot,
-                        mode: _mode,
-                        dark: _dark,
-                        haptics: _haptics,
-                        autoMood: _autoMood,
-                        phase: i * 0.11,
-                      ),
-                    ),
+                  const Text(
+                    'The Anatomy of\nAdaptation',
+                    style: TextStyle(
+                        fontSize: 30, height: 1.1, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                      'A visual study of how life evolves,\nadapts, and thrives.',
+                      style: TextStyle(fontSize: 13, color: Colors.grey)),
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text('Signature moves'),
+                    subtitle: const Text(
+                        'Roar, spray, pounce... one special trick per animal'),
+                    value: _signature,
+                    onChanged: (v) => setState(() => _signature = v),
+                  ),
+                  SegmentedButton<DitherDot>(
+                    showSelectedIcon: false,
+                    segments: const [
+                      ButtonSegment(
+                          value: DitherDot.square, label: Text('Square')),
+                      ButtonSegment(
+                          value: DitherDot.round, label: Text('Round')),
+                      ButtonSegment(value: DitherDot.hex, label: Text('Hex')),
+                      ButtonSegment(
+                          value: DitherDot.diamond, label: Text('Diamond')),
+                    ],
+                    selected: {_dot},
+                    onSelectionChanged: (v) => setState(() => _dot = v.first),
+                  ),
+                  const SizedBox(height: 8),
+                  SegmentedButton<DitherColorMode>(
+                    showSelectedIcon: false,
+                    segments: const [
+                      ButtonSegment(
+                          value: DitherColorMode.solid, label: Text('Solid')),
+                      ButtonSegment(
+                          value: DitherColorMode.twoTone,
+                          label: Text('Two-tone')),
+                      ButtonSegment(
+                          value: DitherColorMode.gradient,
+                          label: Text('Gradient')),
+                    ],
+                    selected: {_mode},
+                    onSelectionChanged: (v) => setState(() => _mode = v.first),
+                  ),
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text('Dark mode'),
+                    value: _dark,
+                    onChanged: (v) => setState(() => _dark = v),
+                  ),
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text('Auto mood (all animals)'),
+                    subtitle: const Text(
+                        'Facial expressions that change on their own'),
+                    value: _autoMood,
+                    onChanged: (v) => setState(() => _autoMood = v),
+                  ),
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text('Haptics'),
+                    subtitle:
+                        const Text('Buzz on form, signature moves and taps'),
+                    value: _haptics,
+                    onChanged: (v) => setState(() => _haptics = v),
+                  ),
+                  const Text(
+                      'Tap the tune icon on any card to open its full studio',
+                      style: TextStyle(fontSize: 12, color: Colors.black45)),
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 14,
+                    runSpacing: 14,
+                    children: [
+                      for (var i = 0; i < _specs.length; i++)
+                        GestureDetector(
+                          onLongPress: () => setState(() => _replay++),
+                          child: _AnimalCard(
+                            key: ValueKey('$i-$_replay'),
+                            spec: _specs[i],
+                            signature: _signature,
+                            dot: _dot,
+                            mode: _mode,
+                            dark: _dark,
+                            haptics: _haptics,
+                            autoMood: _autoMood,
+                            phase: i * 0.11,
+                          ),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                      'Tap an animal to poke it · long-press a card to replay',
+                      style: TextStyle(fontSize: 12, color: Colors.black45)),
                 ],
               ),
-              const SizedBox(height: 12),
-              const Text('Tap an animal to poke it · long-press a card to replay',
-                  style: TextStyle(fontSize: 12, color: Colors.black45)),
-            ],
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 }
 
@@ -227,7 +248,8 @@ class _AnimalCard extends StatelessWidget {
         color: dark ? const Color(0xFF151B2B) : Colors.white,
         borderRadius: BorderRadius.circular(18),
         boxShadow: const [
-          BoxShadow(color: Color(0x14000000), blurRadius: 16, offset: Offset(0, 6)),
+          BoxShadow(
+              color: Color(0x14000000), blurRadius: 16, offset: Offset(0, 6)),
         ],
       ),
       child: Column(
@@ -253,7 +275,8 @@ class _AnimalCard extends StatelessWidget {
             Expanded(
               child: Text(spec.label,
                   style: TextStyle(
-                      fontSize: 10, color: dark ? Colors.white60 : Colors.black45)),
+                      fontSize: 10,
+                      color: dark ? Colors.white60 : Colors.black45)),
             ),
             InkWell(
               onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(

@@ -213,27 +213,27 @@ class DitherPetState extends State<DitherPet> {
   Color? _secondColor; // null = use widget.secondColor
 
   DitherDot get _dot => switch (widget.dot) {
-        PetDot.square  => DitherDot.square,
-        PetDot.round   => DitherDot.round,
-        PetDot.hex     => DitherDot.hex,
+        PetDot.square => DitherDot.square,
+        PetDot.round => DitherDot.round,
+        PetDot.hex => DitherDot.hex,
         PetDot.diamond => DitherDot.diamond,
       };
 
   DitherExpression get _expr => switch (widget.mood) {
-        PetMood.neutral   => DitherExpression.neutral,
-        PetMood.happy     => DitherExpression.happy,
-        PetMood.angry     => DitherExpression.angry,
-        PetMood.sleepy    => DitherExpression.sleepy,
+        PetMood.neutral => DitherExpression.neutral,
+        PetMood.happy => DitherExpression.happy,
+        PetMood.angry => DitherExpression.angry,
+        PetMood.sleepy => DitherExpression.sleepy,
         PetMood.surprised => DitherExpression.surprised,
-        PetMood.sad       => DitherExpression.sad,
-        PetMood.wink      => DitherExpression.wink,
+        PetMood.sad => DitherExpression.sad,
+        PetMood.wink => DitherExpression.wink,
       };
 
   DitherColorMode get _colorMode => switch (widget.themeStyle) {
-        PetTheme.solid    => DitherColorMode.solid,
-        PetTheme.twoTone  => DitherColorMode.twoTone,
+        PetTheme.solid => DitherColorMode.solid,
+        PetTheme.twoTone => DitherColorMode.twoTone,
         PetTheme.gradient => DitherColorMode.gradient,
-        PetTheme.parts    => DitherColorMode.parts,
+        PetTheme.parts => DitherColorMode.parts,
       };
 
   DitherHooks get _hooks {
@@ -253,8 +253,8 @@ class DitherPetState extends State<DitherPet> {
   @override
   Widget build(BuildContext context) {
     // Runtime-overridable values take priority over widget params.
-    final effectiveColor      = _color       ?? widget.color;
-    final effectiveCells      = _cells       ?? widget.resolution;
+    final effectiveColor = _color ?? widget.color;
+    final effectiveCells = _cells ?? widget.resolution;
     final effectiveSecondColor = _secondColor ?? widget.secondColor;
 
     final animal = DitherAnimal(
@@ -286,4 +286,3 @@ class DitherPetState extends State<DitherPet> {
     return animal;
   }
 }
-

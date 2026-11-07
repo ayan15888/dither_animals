@@ -138,8 +138,9 @@ class _DitherAnimalState extends State<DitherAnimal>
   void initState() {
     super.initState();
     _loop = AnimationController(vsync: this, duration: _duration);
-    _clock = AnimationController(vsync: this, duration: const Duration(hours: 1))
-      ..repeat();
+    _clock =
+        AnimationController(vsync: this, duration: const Duration(hours: 1))
+          ..repeat();
     _clock.addListener(_tick);
     _clock.addListener(_moodTick);
     _exprTo = _exprFrom = widget.expression;
@@ -166,8 +167,11 @@ class _DitherAnimalState extends State<DitherAnimal>
     if (!kExprFaces.containsKey(widget.animal)) return;
     final cyc = kMoodCycle[widget.animal] ?? kDefaultMoodCycle;
     final sec = _clock.value * 3600.0;
-    final su = widget.signature ? signatureProgress(widget.animal, _motion, sec) : -1.0;
-    _setMood(signatureMood(widget.animal, su) ?? cyc[(sec / 5.0).floor() % cyc.length]);
+    final su = widget.signature
+        ? signatureProgress(widget.animal, _motion, sec)
+        : -1.0;
+    _setMood(signatureMood(widget.animal, su) ??
+        cyc[(sec / 5.0).floor() % cyc.length]);
   }
 
   // ---- event hooks ----
@@ -192,7 +196,8 @@ class _DitherAnimalState extends State<DitherAnimal>
       if (st == 2) h.onDissolve?.call(a);
       _stage = st;
     }
-    final su = widget.signature && st == 1 ? signatureProgress(a, m, sec) : -1.0;
+    final su =
+        widget.signature && st == 1 ? signatureProgress(a, m, sec) : -1.0;
     if (su >= 0 && !_sigOn) {
       _sigOn = true;
       _sigPeaked = false;
@@ -287,35 +292,39 @@ class _DitherAnimalState extends State<DitherAnimal>
               behavior: HitTestBehavior.opaque,
               onTapDown: widget.pokeable ? _poke : null,
               child: RepaintBoundary(
-              child: CustomPaint(
-                painter: _DitherPainter(
-                  grid: grid,
-                  loop: _loop,
-                  clock: _clock,
-                  motion: _motion,
-                  art: widget.image == null ? kAnimalArt[widget.animal] : null,
-                  color: dark ? DitherTheme.lift(base) : base,
-                  theme: th,
-                  dark: dark,
-                  dot: widget.dot,
-                  dotScale: widget.dotScale,
-                  dotDensity: widget.dotDensity,
-                  phase: widget.phase,
-                  mode: widget.motion,
-                  shimmer: widget.shimmer,
-                  showFace: widget.showFace,
-                  sparkles: widget.sparkles,
-                  signature: widget.signature,
-                  exprFace: widget.image == null ? kExprFaces[widget.animal] : null,
-                  exprFrom: _exprFrom,
-                  exprTo: _exprTo,
-                  exprStart: _exprStart,
-                  sigDef: widget.image == null ? kSignatures[widget.animal] : null,
-                  ripples: _ripples,
-                  loopSeconds: _duration.inMilliseconds / 1000.0,
+                child: CustomPaint(
+                  painter: _DitherPainter(
+                    grid: grid,
+                    loop: _loop,
+                    clock: _clock,
+                    motion: _motion,
+                    art:
+                        widget.image == null ? kAnimalArt[widget.animal] : null,
+                    color: dark ? DitherTheme.lift(base) : base,
+                    theme: th,
+                    dark: dark,
+                    dot: widget.dot,
+                    dotScale: widget.dotScale,
+                    dotDensity: widget.dotDensity,
+                    phase: widget.phase,
+                    mode: widget.motion,
+                    shimmer: widget.shimmer,
+                    showFace: widget.showFace,
+                    sparkles: widget.sparkles,
+                    signature: widget.signature,
+                    exprFace:
+                        widget.image == null ? kExprFaces[widget.animal] : null,
+                    exprFrom: _exprFrom,
+                    exprTo: _exprTo,
+                    exprStart: _exprStart,
+                    sigDef: widget.image == null
+                        ? kSignatures[widget.animal]
+                        : null,
+                    ripples: _ripples,
+                    loopSeconds: _duration.inMilliseconds / 1000.0,
+                  ),
                 ),
               ),
-            ),
             ),
     );
   }
@@ -428,7 +437,8 @@ class _DitherGrid {
         ord[i] = motion.order((x + 0.5) / n * 100, (y + 0.5) / n * 100, ha[i]);
       }
     }
-    return _DitherGrid(n, dens, thr, ord, ha, hb, _sampleDetails(image == null ? kAnimalArt[animal] : null));
+    return _DitherGrid(n, dens, thr, ord, ha, hb,
+        _sampleDetails(image == null ? kAnimalArt[animal] : null));
   }
 
   static List<_Poly> _sampleDetails(AnimalArt? art) {
@@ -504,7 +514,9 @@ const List<Color> _kFillPalette = [
 
 /// Accent strokes for detail kinds 20..22 (gold, emerald, light blue).
 const List<Color> _kStrokePalette = [
-  Color(0xFFF5B82E), Color(0xFF14A06F), Color(0xFF8FD0F5),
+  Color(0xFFF5B82E),
+  Color(0xFF14A06F),
+  Color(0xFF8FD0F5),
 ];
 
 class _DitherPainter extends CustomPainter {
@@ -647,13 +659,17 @@ class _DitherPainter extends CustomPainter {
     final sig = signature ? sigDef : null;
     final su = sig == null ? -1.0 : sig.u(seconds);
     final calm = !signature && motion.calmPose != null;
-    var pose = (calm ? motion.calmPose!(seconds) : motion.pose(seconds)).scaled(alive);
-    if (sig?.pose != null && su >= 0) pose = pose.plus(sig!.pose!(su, seconds).scaled(alive));
+    var pose =
+        (calm ? motion.calmPose!(seconds) : motion.pose(seconds)).scaled(alive);
+    if (sig?.pose != null && su >= 0) {
+      pose = pose.plus(sig!.pose!(su, seconds).scaled(alive));
+    }
     // ---- continuous "life" layer: slow wandering drift, lean into the
     // motion, breathing, and follow-through (head/ears lag behind body) ----
     final lt = seconds + phase * 7.0;
     final ldx = 2.6 * math.sin(0.45 * lt) + 1.2 * math.sin(0.8 * lt + 1.3);
-    final lvx = 2.6 * 0.45 * math.cos(0.45 * lt) + 1.2 * 0.8 * math.cos(0.8 * lt + 1.3);
+    final lvx =
+        2.6 * 0.45 * math.cos(0.45 * lt) + 1.2 * 0.8 * math.cos(0.8 * lt + 1.3);
     final ldy = 0.7 * math.sin(0.9 * lt + 0.4);
     final breath = 0.014 * math.sin(1.9 * lt);
     pose = pose.plus(BodyPose(
@@ -667,7 +683,8 @@ class _DitherPainter extends CustomPainter {
       pose = pose.plus(organicPose(seconds, oseed).scaled(alive));
     }
     Offset wp(double x, double y) {
-      var w = calm ? motion.calmWarp!(x, y, seconds) : motion.warp(x, y, seconds);
+      var w =
+          calm ? motion.calmWarp!(x, y, seconds) : motion.warp(x, y, seconds);
       if (sig?.warp != null && su >= 0) w = w + sig!.warp!(x, y, su, seconds);
       if (motion.organic) w = w + organicWarp(x, y, seconds, oseed);
       final h = ((98 - y) / 100).clamp(0.0, 1.0);
@@ -675,6 +692,7 @@ class _DitherPainter extends CustomPainter {
       final sway = 0.35 * h * math.sin(1.3 * lt - y * 0.05);
       return Offset(w.dx + lag + sway, w.dy);
     }
+
     if (ph.f < 1) pose = pose.plus(motion.entrance(ph.f));
     pose = pose.plus(motion.settle(ph.tau));
 
@@ -712,8 +730,10 @@ class _DitherPainter extends CustomPainter {
 
     final palette = theme.palette(color, dark, primaryLifted: true);
     final nc = palette.length;
-    final main = List.generate(nc, (_) => List.generate(_buckets, (_) => <Offset>[]));
-    final hi = List.generate(nc, (_) => List.generate(_buckets, (_) => <Offset>[]));
+    final main =
+        List.generate(nc, (_) => List.generate(_buckets, (_) => <Offset>[]));
+    final hi =
+        List.generate(nc, (_) => List.generate(_buckets, (_) => <Offset>[]));
     final ga = theme.gradientAngle * math.pi / 180;
     final gcos = math.cos(ga), gsin = math.sin(ga);
     int pick(int i, double cx, double cy) {
@@ -723,7 +743,8 @@ class _DitherPainter extends CustomPainter {
         case DitherColorMode.twoTone:
           return grid.hashB[i] < theme.twoToneMix ? 1 : 0;
         case DitherColorMode.gradient:
-          final t = (((cx - 50) * gcos + (cy - 50) * gsin) / 80 + 0.5).clamp(0.0, 1.0);
+          final t = (((cx - 50) * gcos + (cy - 50) * gsin) / 80 + 0.5)
+              .clamp(0.0, 1.0);
           return (t * (nc - 1)).round();
         case DitherColorMode.parts:
           return _partOf(cx, cy).index;
@@ -825,9 +846,11 @@ class _DitherPainter extends CustomPainter {
     // ---- expression blend (null = original face, untouched) ----
     ExprParams? ep;
     if (exprFace != null &&
-        (exprFrom != DitherExpression.neutral || exprTo != DitherExpression.neutral)) {
+        (exprFrom != DitherExpression.neutral ||
+            exprTo != DitherExpression.neutral)) {
       final tt = ((seconds - exprStart) / 0.45).clamp(0.0, 1.0).toDouble();
-      ep = ExprParams.lerp(kExprParams[exprFrom]!, kExprParams[exprTo]!, tt * tt * (3 - 2 * tt));
+      ep = ExprParams.lerp(
+          kExprParams[exprFrom]!, kExprParams[exprTo]!, tt * tt * (3 - 2 * tt));
     }
 
     // ---- face (pops in, eyes look around + blink) ----
@@ -855,7 +878,9 @@ class _DitherPainter extends CustomPainter {
       // on dark backgrounds the dark eye/brow ink would vanish, so flip it
       final eyeColor = dark
           ? const Color(0xFFF1F5F9)
-          : hsl.withLightness((hsl.lightness * 0.35).clamp(0.05, 0.25)).toColor();
+          : hsl
+              .withLightness((hsl.lightness * 0.35).clamp(0.05, 0.25))
+              .toColor();
       final eyePaint = Paint()..color = _a(eyeColor, faceA);
       final shine = Paint()
         ..color = _a(dark ? const Color(0xFF0B0F1A) : Colors.white, faceA);
@@ -896,7 +921,8 @@ class _DitherPainter extends CustomPainter {
                   ..color = _a(Colors.white, 0.85 * faceA)
                   ..strokeWidth = poly.width);
           case 3:
-            canvas.drawPath(path, fillP..color = _a(Colors.white, 0.95 * faceA));
+            canvas.drawPath(
+                path, fillP..color = _a(Colors.white, 0.95 * faceA));
           case 5 || 6 || 7 || 8 || 9 || 10 || 11 || 12 || 13 || 14:
             canvas.drawPath(
                 path, fillP..color = _a(_kFillPalette[poly.kind - 5], faceA));
@@ -918,7 +944,8 @@ class _DitherPainter extends CustomPainter {
       // ---- roaring mouth: dark cavity, tongue, fangs ----
       if (fx != null && roarOpen > 0.02) {
         final mw = wp(fx.mouth.dx, fx.mouth.dy);
-        final cx = fx.mouth.dx + mw.dx * alive, cy = fx.mouth.dy + mw.dy * alive;
+        final cx = fx.mouth.dx + mw.dx * alive,
+            cy = fx.mouth.dy + mw.dy * alive;
         final w = fx.mouthW * (0.55 + 0.45 * roarOpen);
         final h = fx.mouthH * roarOpen;
         final cavity = Path()
@@ -927,13 +954,17 @@ class _DitherPainter extends CustomPainter {
           ..quadraticBezierTo(cx + w * 0.9, cy + h * 1.05, cx + w, cy)
           ..quadraticBezierTo(cx, cy - h * 0.12, cx - w, cy)
           ..close();
-        canvas.drawPath(cavity,
-            fillP..color = _a(Color.lerp(eyeColor, Colors.black, 0.45)!, faceA));
+        canvas.drawPath(
+            cavity,
+            fillP
+              ..color = _a(Color.lerp(eyeColor, Colors.black, 0.45)!, faceA));
         canvas.save();
         canvas.clipPath(cavity);
         canvas.drawOval(
             Rect.fromCenter(
-                center: Offset(cx, cy + h * 0.98), width: w * 1.3, height: h * 0.85),
+                center: Offset(cx, cy + h * 0.98),
+                width: w * 1.3,
+                height: h * 0.85),
             fillP..color = _a(const Color(0xFFFF7FA6), faceA));
         canvas.restore();
         final fang = fillP..color = _a(Colors.white, faceA);
@@ -983,7 +1014,15 @@ class _DitherPainter extends CustomPainter {
           final w = wp(x, y);
           return Offset(x + w.dx * alive, y + w.dy * alive);
         }
-        drawExprFace(canvas, exprFace!, ep, atXY, eyeColor, faceA, seconds,
+
+        drawExprFace(
+            canvas,
+            exprFace!,
+            ep,
+            atXY,
+            eyeColor,
+            faceA,
+            seconds,
             [for (final e in a.eyes) at(e) + look],
             a.eyes.isEmpty ? 4.0 : a.eyes.first.r * pop);
       }
@@ -1009,6 +1048,7 @@ class _DitherPainter extends CustomPainter {
         final w = wp(x, y);
         return Offset(x + w.dx * alive, y + w.dy * alive);
       }
+
       sig!.fx!(canvas, SigCtx(su, seconds, alive, color, sigAt));
     }
 
@@ -1027,8 +1067,10 @@ class _DitherPainter extends CustomPainter {
           final ang = i * math.pi * 2 / 16 + math.sin(seconds * 7 + i) * 0.04;
           final r0 = 46 + 2.5 * math.sin(seconds * 24 + i * 1.7);
           final r1 = r0 + 4 + 5 * ro;
-          final p0 = Offset(bc.dx + math.cos(ang) * r0, bc.dy + math.sin(ang) * r0);
-          final p1 = Offset(bc.dx + math.cos(ang) * r1, bc.dy + math.sin(ang) * r1);
+          final p0 =
+              Offset(bc.dx + math.cos(ang) * r0, bc.dy + math.sin(ang) * r0);
+          final p1 =
+              Offset(bc.dx + math.cos(ang) * r1, bc.dy + math.sin(ang) * r1);
           if (p1.dy < 2 || p0.dy < 2 || p1.dx < 1 || p1.dx > 99) continue;
           canvas.drawLine(p0, p1, dash);
         }
@@ -1074,8 +1116,8 @@ class _DitherPainter extends CustomPainter {
             (0.8 + 0.4 * ((i * 37) % 10) / 10.0);
         final pos = c + Offset(math.cos(ang), math.sin(ang)) * rr;
         final len = 4.2 * fade * (0.7 + (i % 3) * 0.25);
-        lineP.color = _a(i.isEven ? color : Color.lerp(color, Colors.white, 0.4)!,
-            fade);
+        lineP.color =
+            _a(i.isEven ? color : Color.lerp(color, Colors.white, 0.4)!, fade);
         canvas.drawLine(pos - Offset(len, 0), pos + Offset(len, 0), lineP);
         canvas.drawLine(pos - Offset(0, len), pos + Offset(0, len), lineP);
       }

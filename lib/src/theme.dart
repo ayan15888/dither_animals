@@ -68,7 +68,10 @@ class DitherTheme {
   static Color lift(Color c) {
     final h = HSLColor.fromColor(c);
     final l = (h.lightness * 0.45 + 0.42).clamp(0.55, 0.78);
-    return h.withLightness(l).withSaturation((h.saturation * 1.05).clamp(0.0, 1.0)).toColor();
+    return h
+        .withLightness(l)
+        .withSaturation((h.saturation * 1.05).clamp(0.0, 1.0))
+        .toColor();
   }
 
   /// The colors dots can take. [primary] is the base color; when
@@ -130,9 +133,16 @@ class DitherTheme {
       other.followSystem == followSystem;
 
   @override
-  int get hashCode => Object.hash(mode, primary, secondary, gradientAngle,
-      gradientSteps, twoToneMix, Object.hashAll(parts.entries.map((e) => Object.hash(e.key, e.value))),
-      brightness, followSystem);
+  int get hashCode => Object.hash(
+      mode,
+      primary,
+      secondary,
+      gradientAngle,
+      gradientSteps,
+      twoToneMix,
+      Object.hashAll(parts.entries.map((e) => Object.hash(e.key, e.value))),
+      brightness,
+      followSystem);
 }
 
 /// Event hooks, e.g. for haptics, sound or analytics. Every callback is

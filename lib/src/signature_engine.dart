@@ -43,7 +43,8 @@ BodyPose _specPose(List<SigOp> ops, double u, double t) {
     switch (o.k) {
       case 'hop':
         final k = math.sin(math.pi * p[0] * u).abs();
-        final land = math.pow(1 - k, 6).toDouble(); // squash right at touch-down
+        final land =
+            math.pow(1 - k, 6).toDouble(); // squash right at touch-down
         b = b.plus(BodyPose(
             dy: -p[1] * k,
             rot: p[2] * math.sin(2 * math.pi * p[0] * u) * k,
@@ -51,7 +52,8 @@ BodyPose _specPose(List<SigOp> ops, double u, double t) {
             sx: 1 - 0.03 * k + 0.05 * land));
         break;
       case 'shake':
-        b = b.plus(BodyPose(rot: p[1] * math.sin(t * p[0]) * _senv(u, 0.15, 0.3)));
+        b = b.plus(
+            BodyPose(rot: p[1] * math.sin(t * p[0]) * _senv(u, 0.15, 0.3)));
         break;
       case 'tilt':
         final e2 = _senv(u, 0.3, 0.35);
@@ -87,21 +89,24 @@ BodyPose _specPose(List<SigOp> ops, double u, double t) {
         break;
       case 'crouch':
         final c = _senv(u, 0.25, 0.25);
-        b = b.plus(BodyPose(dy: p[0] * c, sy: 1 - p[1] * c, sx: 1 + p[1] * 0.5 * c));
+        b = b.plus(
+            BodyPose(dy: p[0] * c, sy: 1 - p[1] * c, sx: 1 + p[1] * 0.5 * c));
         break;
       case 'sway':
         b = b.plus(BodyPose(dx: p[0] * math.sin(t * p[1]) * e));
         break;
       case 'rear':
         final e2 = _senv(u, 0.3, 0.35);
-        b = b.plus(BodyPose(rot: -p[0] * e2, sy: 1 + p[1] * e2, dy: -p[1] * 10 * e2));
+        b = b.plus(
+            BodyPose(rot: -p[0] * e2, sy: 1 + p[1] * e2, dy: -p[1] * 10 * e2));
         break;
     }
   }
   return b;
 }
 
-double _rampOf(int gd, double x, double y, double x0, double y0, double x1, double y1) {
+double _rampOf(
+    int gd, double x, double y, double x0, double y0, double x1, double y1) {
   switch (gd) {
     case 1:
       return _clamp01((x - x0) / (x1 - x0));
@@ -117,7 +122,10 @@ double _rampOf(int gd, double x, double y, double x0, double y0, double x1, doub
 }
 
 double _rectWeight(double x, double y, List<double> p) =>
-    _sm((x - p[0]) / 9) * _sm((p[2] - x) / 9) * _sm((y - p[1]) / 9) * _sm((p[3] - y) / 9);
+    _sm((x - p[0]) / 9) *
+    _sm((p[2] - x) / 9) *
+    _sm((y - p[1]) / 9) *
+    _sm((p[3] - y) / 9);
 
 Offset _specWarp(List<SigOp> ops, double x, double y, double u, double t) {
   var ox = 0.0, oy = 0.0;
@@ -184,7 +192,9 @@ void _specFx(Canvas c, SigCtx s, List<SigOp> ops) {
           final age = (ph * 1.3 - i / n * 0.6).clamp(0.0, 1.0).toDouble();
           if (age <= 0 || age >= 1) continue;
           final pos = anchor +
-              Offset((i - (n - 1) / 2) * size * 1.6 + math.sin(age * 5 + i) * size * 0.5,
+              Offset(
+                  (i - (n - 1) / 2) * size * 1.6 +
+                      math.sin(age * 5 + i) * size * 0.5,
                   -age * size * 7);
           final a = math.sin(math.pi * age);
           if (o.k == 'hearts') {
@@ -192,8 +202,10 @@ void _specFx(Canvas c, SigCtx s, List<SigOp> ops) {
           } else if (o.k == 'notes') {
             c.drawCircle(pos, size * 0.5, _sp(col, 0.9 * a));
             final st = _sp(col, 0.9 * a, w: 1.0, fill: false);
-            c.drawLine(pos + Offset(size * 0.45, 0), pos + Offset(size * 0.45, -size * 1.9), st);
-            c.drawLine(pos + Offset(size * 0.45, -size * 1.9), pos + Offset(size * 1.2, -size * 1.3), st);
+            c.drawLine(pos + Offset(size * 0.45, 0),
+                pos + Offset(size * 0.45, -size * 1.9), st);
+            c.drawLine(pos + Offset(size * 0.45, -size * 1.9),
+                pos + Offset(size * 1.2, -size * 1.3), st);
           } else {
             final st = _sp(col, 0.9 * a, w: 1.0 + 0.2 * i, fill: false);
             final r = size * (0.6 + 0.25 * i);
@@ -210,7 +222,10 @@ void _specFx(Canvas c, SigCtx s, List<SigOp> ops) {
         for (var i = 0; i < n; i++) {
           final ang = 2 * math.pi * i / n + ph * 0.8;
           final tw = math.sin(math.pi * ((ph * 2 + i / n) % 1.0));
-          final pos = anchor + Offset(math.cos(ang), math.sin(ang)) * extra * (0.85 + 0.15 * math.sin(i * 2.0));
+          final pos = anchor +
+              Offset(math.cos(ang), math.sin(ang)) *
+                  extra *
+                  (0.85 + 0.15 * math.sin(i * 2.0));
           _star(c, pos, size * (0.5 + 0.7 * tw), _sp(col, 0.9 * tw));
         }
         break;
@@ -220,7 +235,8 @@ void _specFx(Canvas c, SigCtx s, List<SigOp> ops) {
           final age = (ph * 1.6 + i * 0.045) % 1.0;
           final h1 = hash01(i.toDouble(), 3), h2 = hash01(i.toDouble(), 5);
           final pos = anchor +
-              Offset(extra * (h1 - 0.35) * 2.2 * age, -56 * (0.6 + 0.5 * h2) * age + 70 * age * age);
+              Offset(extra * (h1 - 0.35) * 2.2 * age,
+                  -56 * (0.6 + 0.5 * h2) * age + 70 * age * age);
           c.drawCircle(pos, size * (1.0 - 0.4 * age) * (0.7 + 0.5 * h2),
               _sp(col, 0.85 * f.clamp(0.0, 1.0).toDouble() * (1 - age * 0.5)));
         }
@@ -229,8 +245,12 @@ void _specFx(Canvas c, SigCtx s, List<SigOp> ops) {
         for (var i = 0; i < n; i++) {
           final age = (ph * 1.3 - i / n * 0.5).clamp(0.0, 1.0).toDouble();
           if (age <= 0 || age >= 1) continue;
-          final pos = anchor + Offset(math.sin(i * 2.0 + age * 6) * size * 2.2 + (i - n / 2) * size, -age * size * 9);
-          c.drawCircle(pos, size * (0.6 + age), _sp(col, 0.9 * (1 - age), w: 1.0, fill: false));
+          final pos = anchor +
+              Offset(
+                  math.sin(i * 2.0 + age * 6) * size * 2.2 + (i - n / 2) * size,
+                  -age * size * 9);
+          c.drawCircle(pos, size * (0.6 + age),
+              _sp(col, 0.9 * (1 - age), w: 1.0, fill: false));
         }
         break;
       case 'dust':
@@ -238,22 +258,30 @@ void _specFx(Canvas c, SigCtx s, List<SigOp> ops) {
         for (var i = 0; i < n; i++) {
           final side = i.isEven ? 1.0 : -1.0;
           final h = hash01(i.toDouble(), 11);
-          final pos = anchor + Offset(side * (4 + ph * extra * (0.4 + h * 0.6)), -ph * 6 * h - 1);
-          c.drawCircle(pos, size * (0.5 + ph * 0.9) * (0.6 + h * 0.6), _sp(col, 0.55 * fd));
+          final pos = anchor +
+              Offset(
+                  side * (4 + ph * extra * (0.4 + h * 0.6)), -ph * 6 * h - 1);
+          c.drawCircle(pos, size * (0.5 + ph * 0.9) * (0.6 + h * 0.6),
+              _sp(col, 0.55 * fd));
         }
         break;
       case 'rings':
         for (var k = 0; k < 3; k++) {
           final age = (ph * 1.5 + k / 3) % 1.0;
-          c.drawCircle(anchor, size * (0.3 + age * 2.2),
-              _sp(col, 0.7 * (1 - age) * math.sin(math.pi * ph), w: 1.1, fill: false));
+          c.drawCircle(
+              anchor,
+              size * (0.3 + age * 2.2),
+              _sp(col, 0.7 * (1 - age) * math.sin(math.pi * ph),
+                  w: 1.1, fill: false));
         }
         break;
       case 'lines':
         final fl = math.sin(math.pi * ph);
         for (var i = 0; i < n; i++) {
-          final p0 = anchor + Offset(-(2 + (i % 2) * 4.0), (i - (n - 1) / 2) * size * 1.5);
-          c.drawLine(p0, p0 + Offset(-extra * fl, 0), _sp(col, 0.8 * fl, w: 1.1, fill: false));
+          final p0 = anchor +
+              Offset(-(2 + (i % 2) * 4.0), (i - (n - 1) / 2) * size * 1.5);
+          c.drawLine(p0, p0 + Offset(-extra * fl, 0),
+              _sp(col, 0.8 * fl, w: 1.1, fill: false));
         }
         break;
       case 'sweat':
@@ -262,31 +290,39 @@ void _specFx(Canvas c, SigCtx s, List<SigOp> ops) {
         break;
       case 'tongue':
         // quick snap out to catch a fly, then reel back in
-        final k = ph < 0.4 ? _sm(ph / 0.4) : 1 - _sm((ph - 0.4) / 0.35).clamp(0.0, 1.0).toDouble();
+        final k = ph < 0.4
+            ? _sm(ph / 0.4)
+            : 1 - _sm((ph - 0.4) / 0.35).clamp(0.0, 1.0).toDouble();
         final tip = anchor + Offset(extra * 0.8, -extra * 0.55) * k;
         const pink = Color(0xFFFF7FA6);
         c.drawLine(anchor, tip, _sp(pink, 1.0, w: 2.2, fill: false));
         c.drawCircle(tip, 2.0, _sp(pink, 1.0));
         if (ph < 0.45) {
           final fly = anchor + Offset(extra * 0.8, -extra * 0.55);
-          c.drawCircle(fly + Offset(0, math.sin(s.t * 30) * 0.6), 1.2, _sp(col, 0.95));
+          c.drawCircle(
+              fly + Offset(0, math.sin(s.t * 30) * 0.6), 1.2, _sp(col, 0.95));
         }
         break;
       case 'cloud':
         for (var i = 0; i < n; i++) {
           final h = hash01(i.toDouble(), 17);
           final r = size * (0.6 + 0.8 * h) * (0.4 + ph);
-          final pos = anchor + Offset(extra * ph * (0.4 + h) + (h - 0.5) * 6, (hash01(i.toDouble(), 19) - 0.5) * 12 * (0.3 + ph));
-          c.drawCircle(pos, r, _sp(const Color(0xFF111827), 0.55 * (1 - ph * 0.7)));
+          final pos = anchor +
+              Offset(extra * ph * (0.4 + h) + (h - 0.5) * 6,
+                  (hash01(i.toDouble(), 19) - 0.5) * 12 * (0.3 + ph));
+          c.drawCircle(
+              pos, r, _sp(const Color(0xFF111827), 0.55 * (1 - ph * 0.7)));
         }
         break;
       case 'orbit':
         for (var i = 0; i < n; i++) {
           final ang = s.t * 4 + i * 2 * math.pi / n;
-          final pos = anchor + Offset(math.cos(ang) * extra, math.sin(ang) * extra * 0.35);
+          final pos = anchor +
+              Offset(math.cos(ang) * extra, math.sin(ang) * extra * 0.35);
           final a = math.sin(math.pi * ph).clamp(0.0, 1.0).toDouble();
           c.drawCircle(pos, size, _sp(col, 0.9 * a));
-          c.drawLine(pos, pos + Offset(0, -size * 1.4), _sp(col, 0.7 * a, w: 1.0, fill: false));
+          c.drawLine(pos, pos + Offset(0, -size * 1.4),
+              _sp(col, 0.7 * a, w: 1.0, fill: false));
         }
         break;
       case 'moon':
@@ -294,7 +330,10 @@ void _specFx(Canvas c, SigCtx s, List<SigOp> ops) {
         final m = Path.combine(
             PathOperation.difference,
             Path()..addOval(Rect.fromCircle(center: anchor, radius: size)),
-            Path()..addOval(Rect.fromCircle(center: anchor + Offset(size * 0.5, -size * 0.2), radius: size * 0.85)));
+            Path()
+              ..addOval(Rect.fromCircle(
+                  center: anchor + Offset(size * 0.5, -size * 0.2),
+                  radius: size * 0.85)));
         c.drawPath(m, _sp(col, 0.85 * a));
         break;
     }
