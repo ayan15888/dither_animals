@@ -1,6 +1,6 @@
 # dither_animals
 
-[![pub package](https://img.shields.io/badge/pub-v2.0.0-blue.svg)](https://pub.dev/packages/dither_animals)
+[![pub package](https://img.shields.io/badge/pub-v2.0.2-blue.svg)](https://pub.dev/packages/dither_animals)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Flutter](https://img.shields.io/badge/Flutter-%3E%3D3.10.0-02569B?logo=flutter)](https://flutter.dev)
 [![GitHub](https://img.shields.io/badge/GitHub-ayan15888%2Fdither__animals-181717?logo=github)](https://github.com/ayan15888/dither_animals)

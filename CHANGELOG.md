@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Standard Version](https://semver.org/) for commit guidelines.
 
+## 2.0.2
+
+- Formatted all source files with `dart format`.
+- Resolved all lints and static analysis warnings for full 140/140 pub.dev score.
+
 ## 2.0.1
 
 - Cleaned up redundant imports, unused local variables, and deprecated API warnings across all codebase files.

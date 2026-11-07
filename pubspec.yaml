@@ -1,6 +1,6 @@
 name: dither_animals
 description: Animated dithered animal widgets for Flutter with 50 cute chibi presets, ordered dithering, ripple poke physics, facial expressions, signature moves, and studio.
-version: 2.0.1
+version: 2.0.2
 homepage: https://github.com/ayan15888/dither_animals
 repository: https://github.com/ayan15888/dither_animals
 issue_tracker: https://github.com/ayan15888/dither_animals/issues
