@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Standard Version](https://semver.org/) for commit guidelines.
 
+## 2.0.0
+
+- Added `screenshots` metadata in `pubspec.yaml` to display preview thumbnails in pub.dev search results and the package right-hand sidebar.
+- Added high-resolution gallery grid (`doc/preview.png`) and close-up detail (`doc/animals_detail.png`) screenshots.
+- Enhanced `doc/preview.gif` animation loop starting with animals fully rendered.
+- Expanded to 50 handcrafted chibi animal presets with signature moves and expressions.
+- Added `AnimalStudioPage`, `DitherTheme`, and interactive signature engine.
+- Added `DitherPet` — a simple, beginner-friendly wrapper widget with plain-English parameters (`PetMood`, `PetDot`, `PetTheme`), `DitherPetState` for runtime control (`setColor`, `setSecondColor`, `setCells`, `replay`), and haptics enabled by default.
+- Added facial expressions system: `DitherExpression` with 7 moods (neutral, happy, angry, sleepy, surprised, sad, wink), smooth morphing between expressions, and `autoMood` for self-changing moods.
+- Added `DitherTheme` with solid, two-tone, gradient, and per-part color modes plus dark mode support.
+- Added `DitherHooks` for event callbacks: `onBuildStart`, `onFormed`, `onDissolve`, `onSignatureStart`, `onSignaturePeak`, `onSignatureEnd`, `onPoke`.
+
 ## 1.0.2
 
 - Fixed pub.dev README image rendering using absolute public raw media URLs.

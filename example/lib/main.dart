@@ -1,312 +1,233 @@
-import 'package:dither_animals/dither_animals.dart';
 import 'package:flutter/material.dart';
+import 'package:dither_animals/dither_animals.dart';
 
-void main() => runApp(const DitherAnimalsDemoApp());
+void main() => runApp(const DemoApp());
 
-class DitherAnimalsDemoApp extends StatelessWidget {
-  const DitherAnimalsDemoApp({super.key});
+class DemoApp extends StatelessWidget {
+  const DemoApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Dither Animals Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: const Color(0xFF1F3BFF),
-        scaffoldBackgroundColor: const Color(0xFFF3F4F6),
-      ),
-      home: const AnimalsGalleryPage(),
+      theme: ThemeData(useMaterial3: true),
+      home: const DemoPage(),
     );
   }
 }
 
-class AnimalSpec {
-  const AnimalSpec(this.type, this.color, this.label, this.personality);
+class _Spec {
+  const _Spec(this.type, this.color, this.label);
   final DitherAnimalType type;
   final Color color;
   final String label;
-  final String personality;
 }
 
-const animalSpecs = [
-  AnimalSpec(DitherAnimalType.owl, Color(0xFFFF5A1F), 'Owl', 'sways & blinks'),
-  AnimalSpec(DitherAnimalType.elephant, Color(0xFF0A2BE0), 'Elephant', 'trunk swing'),
-  AnimalSpec(DitherAnimalType.rabbit, Color(0xFF7B2FF7), 'Rabbit', 'hops gently'),
-  AnimalSpec(DitherAnimalType.fish, Color(0xFFE6197A), 'Fish', 'swims & blows bubbles'),
-  AnimalSpec(DitherAnimalType.turtle, Color(0xFF16A37F), 'Turtle', 'paddles smoothly'),
-  AnimalSpec(DitherAnimalType.cat, Color(0xFFF59E0B), 'Cat', 'tail swish & perked ears'),
-  AnimalSpec(DitherAnimalType.penguin, Color(0xFF0D9488), 'Penguin', 'waddles side-to-side'),
-  AnimalSpec(DitherAnimalType.frog, Color(0xFF65A30D), 'Frog', 'big springy hops'),
-  AnimalSpec(DitherAnimalType.octopus, Color(0xFFE11D48), 'Octopus', 'jets & undulating tentacles'),
-  AnimalSpec(DitherAnimalType.bear, Color(0xFF8B5A2B), 'Bear', 'happy rhythmic dance'),
-  AnimalSpec(DitherAnimalType.lion, Color(0xFFB45309), 'Lion', 'roars with majestic mane'),
-  AnimalSpec(DitherAnimalType.tiger, Color(0xFFE8590C), 'Tiger', 'prowls stealthily'),
-  AnimalSpec(DitherAnimalType.dog, Color(0xFF6D4C41), 'Dog', 'wags tail excitedly'),
-  AnimalSpec(DitherAnimalType.panda, Color(0xFF1F2937), 'Panda', 'munches bamboo leisurely'),
-  AnimalSpec(DitherAnimalType.pig, Color(0xFFF472B6), 'Pig', 'snuffles & bounces'),
-  AnimalSpec(DitherAnimalType.fox, Color(0xFFC2410C), 'Fox', 'sly bushy sweep'),
-  AnimalSpec(DitherAnimalType.monkey, Color(0xFFA16207), 'Monkey', 'swings playfully'),
-  AnimalSpec(DitherAnimalType.duck, Color(0xFFEAB308), 'Duck', 'quacks & bobs head'),
-  AnimalSpec(DitherAnimalType.sheep, Color(0xFF6366F1), 'Sheep', 'fluffy boings'),
-  AnimalSpec(DitherAnimalType.hedgehog, Color(0xFF57534E), 'Hedgehog', 'bristles & scurries'),
-  AnimalSpec(DitherAnimalType.sun, Color(0xFFF59E0B), 'Sun', 'radiant rays wiggle'),
-  AnimalSpec(DitherAnimalType.cloud, Color(0xFF3B82F6), 'Cloud', 'floats & sprinkles rain'),
-  AnimalSpec(DitherAnimalType.moon, Color(0xFF6D28D9), 'Moon', 'sleepy serene rock'),
-  AnimalSpec(DitherAnimalType.star, Color(0xFFEAB308), 'Star', 'twinkles brightly'),
-  AnimalSpec(DitherAnimalType.ghost, Color(0xFF64748B), 'Ghost', 'spooky floating boo!'),
-  AnimalSpec(DitherAnimalType.mushroom, Color(0xFFDC2626), 'Mushroom', 'jelly cap hop'),
-  AnimalSpec(DitherAnimalType.cactus, Color(0xFF15803D), 'Cactus', 'desert desert sway'),
-  AnimalSpec(DitherAnimalType.robot, Color(0xFF0369A1), 'Robot', 'boots up & beeps'),
-  AnimalSpec(DitherAnimalType.rocket, Color(0xFFEA580C), 'Rocket', 'blasts off to orbit'),
-  AnimalSpec(DitherAnimalType.cupcake, Color(0xFFDB2777), 'Cupcake', 'wobbles deliciously'),
+const _specs = [
+  _Spec(DitherAnimalType.owl, Color(0xFFFF5A1F), '01 Owl · head swivel'),
+  _Spec(DitherAnimalType.elephant, Color(0xFF0A2BE0), '02 Elephant · water spray'),
+  _Spec(DitherAnimalType.rabbit, Color(0xFF7B2FF7), '03 Rabbit · binky hop'),
+  _Spec(DitherAnimalType.fish, Color(0xFFE6197A), '04 Fish · speed dart'),
+  _Spec(DitherAnimalType.turtle, Color(0xFF16A37F), '05 Turtle · shell hide'),
+  _Spec(DitherAnimalType.cat, Color(0xFFF59E0B), '06 Cat · pounce + purr'),
+  _Spec(DitherAnimalType.penguin, Color(0xFF0D9488), '07 Penguin · waddles'),
+  _Spec(DitherAnimalType.frog, Color(0xFF65A30D), '08 Frog · big hops'),
+  _Spec(DitherAnimalType.octopus, Color(0xFFE11D48), '09 Octopus · jets'),
+  _Spec(DitherAnimalType.bear, Color(0xFF8B5A2B), '10 Bear · happy dance'),
+  _Spec(DitherAnimalType.lion, Color(0xFFB45309), '11 Lion · roars'),
+  _Spec(DitherAnimalType.tiger, Color(0xFFE8590C), '12 Tiger · prowls'),
+  _Spec(DitherAnimalType.dog, Color(0xFF6D4C41), '13 Dog · wags'),
+  _Spec(DitherAnimalType.panda, Color(0xFF1F2937), '14 Panda · munches'),
+  _Spec(DitherAnimalType.mouse, Color(0xFF64748B), '15 Mouse · nibbles'),
+  _Spec(DitherAnimalType.fox, Color(0xFFC2410C), '16 Fox · sly sweep'),
+  _Spec(DitherAnimalType.monkey, Color(0xFFA16207), '17 Monkey · swings'),
+  _Spec(DitherAnimalType.duck, Color(0xFFEAB308), '18 Duck · quacks'),
+  _Spec(DitherAnimalType.sheep, Color(0xFF6366F1), '19 Sheep · boings'),
+  _Spec(DitherAnimalType.hedgehog, Color(0xFF57534E), '20 Hedgehog · bristles'),
+  _Spec(DitherAnimalType.koala, Color(0xFF6B7280), '21 Koala · sleepy'),
+  _Spec(DitherAnimalType.raccoon, Color(0xFF475569), '22 Raccoon · sneaky'),
+  _Spec(DitherAnimalType.whale, Color(0xFF0EA5E9), '23 Whale · spouts'),
+  _Spec(DitherAnimalType.bee, Color(0xFFCA8A04), '24 Bee · buzzes'),
+  _Spec(DitherAnimalType.cow, Color(0xFF334155), '25 Cow · chews & nods'),
+  _Spec(DitherAnimalType.giraffe, Color(0xFFD97706), '26 Giraffe · graceful sway'),
+  _Spec(DitherAnimalType.zebra, Color(0xFF111827), '27 Zebra · gallops'),
+  _Spec(DitherAnimalType.crab, Color(0xFFDC2626), '28 Crab · scuttles'),
+  _Spec(DitherAnimalType.flamingo, Color(0xFFF43F5E), '29 Flamingo · neck ribbon'),
+  _Spec(DitherAnimalType.butterfly, Color(0xFF2563EB), '30 Butterfly · flutters'),
+  _Spec(DitherAnimalType.snail, Color(0xFFA0623A), '31 Snail · glides'),
+  _Spec(DitherAnimalType.squirrel, Color(0xFFB5541C), '32 Squirrel · tail sweep'),
+  _Spec(DitherAnimalType.hippo, Color(0xFF6F85A6), '33 Hippo · yawns'),
+  _Spec(DitherAnimalType.deer, Color(0xFF9C6B3C), '34 Deer · bounds'),
+  _Spec(DitherAnimalType.parrot, Color(0xFF1F6FEB), '35 Parrot · flutters'),
+  _Spec(DitherAnimalType.kangaroo, Color(0xFFC98A4B), '36 Kangaroo · hops'),
+  _Spec(DitherAnimalType.shark, Color(0xFF5C7A99), '37 Shark · glides'),
+  _Spec(DitherAnimalType.chicken, Color(0xFFC9A27A), '38 Chicken · pecks'),
+  _Spec(DitherAnimalType.ladybug, Color(0xFFD62828), '39 Ladybug · crawls'),
+  _Spec(DitherAnimalType.wolf, Color(0xFF6B7785), '40 Wolf · howls'),
+  _Spec(DitherAnimalType.horse, Color(0xFF8B5E3C), '41 Horse · tosses mane'),
+  _Spec(DitherAnimalType.camel, Color(0xFFD0A050), '42 Camel · chews'),
+  _Spec(DitherAnimalType.rhino, Color(0xFF7B8794), '43 Rhino · scrapes'),
+  _Spec(DitherAnimalType.goat, Color(0xFF9A8F7D), '44 Goat · kick-hops'),
+  _Spec(DitherAnimalType.seal, Color(0xFF3F6E8C), '45 Seal · claps'),
+  _Spec(DitherAnimalType.bat, Color(0xFF5B3A7A), '46 Bat · hovers'),
+  _Spec(DitherAnimalType.crocodile, Color(0xFF3C8D40), '47 Crocodile · snaps'),
+  _Spec(DitherAnimalType.jellyfish, Color(0xFFD36BC4), '48 Jellyfish · pulses'),
+  _Spec(DitherAnimalType.peacock, Color(0xFF0E8A8A), '49 Peacock · fans tail'),
+  _Spec(DitherAnimalType.redpanda, Color(0xFFC2410C), '50 Red panda · tail ripple'),
 ];
 
-class AnimalsGalleryPage extends StatefulWidget {
-  const AnimalsGalleryPage({super.key});
+class DemoPage extends StatefulWidget {
+  const DemoPage({super.key});
 
   @override
-  State<AnimalsGalleryPage> createState() => _AnimalsGalleryPageState();
+  State<DemoPage> createState() => _DemoPageState();
 }
 
-class _AnimalsGalleryPageState extends State<AnimalsGalleryPage> {
-  int _replayKey = 0;
-  DitherDot _dotShape = DitherDot.square;
-  DitherMotion _motionMode = DitherMotion.loop;
-  int _cells = 96;
-  String _searchQuery = '';
-  bool _showFace = true;
-  bool _sparkles = true;
+class _DemoPageState extends State<DemoPage> {
+  int _replay = 0;
+  bool _signature = true;
+  DitherDot _dot = DitherDot.square;
+  DitherColorMode _mode = DitherColorMode.solid;
+  bool _dark = false;
+  bool _haptics = true;
+  bool _autoMood = false;
 
   @override
   Widget build(BuildContext context) {
-    final filtered = animalSpecs.where((s) {
-      if (_searchQuery.isEmpty) return true;
-      final q = _searchQuery.toLowerCase();
-      return s.label.toLowerCase().contains(q) ||
-          s.personality.toLowerCase().contains(q);
-    }).toList();
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'dither_animals',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-            Text(
-              'Animated ordered-dither animal widgets',
-              style: TextStyle(fontSize: 12, color: Colors.grey),
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            tooltip: 'Replay all animations',
-            icon: const Icon(Icons.replay),
-            onPressed: () => setState(() => _replayKey++),
-          ),
-          IconButton(
-            tooltip: 'Toggle Dot Shape (Round/Square)',
-            icon: Icon(
-              _dotShape == DitherDot.round
-                  ? Icons.circle
-                  : Icons.crop_square_rounded,
-            ),
-            onPressed: () => setState(() {
-              _dotShape = _dotShape == DitherDot.square
-                  ? DitherDot.round
-                  : DitherDot.square;
-            }),
-          ),
-        ],
-      ),
+    return Theme(
+      data: ThemeData(
+          useMaterial3: true,
+          brightness: _dark ? Brightness.dark : Brightness.light),
+      child: Scaffold(
+      backgroundColor: _dark ? const Color(0xFF0B0F1A) : const Color(0xFFE4E4E6),
       body: SafeArea(
-        child: Column(
-          children: [
-            _buildControlsBar(),
-            Expanded(
-              child: filtered.isEmpty
-                  ? const Center(child: Text('No matching animals found.'))
-                  : SingleChildScrollView(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Wrap(
-                            spacing: 12,
-                            runSpacing: 12,
-                            children: [
-                              for (var i = 0; i < filtered.length; i++)
-                                _AnimalCard(
-                                  key: ValueKey(
-                                    '${filtered[i].type.name}-$_replayKey-$_dotShape-$_cells-$_motionMode-$_showFace-$_sparkles',
-                                  ),
-                                  spec: filtered[i],
-                                  phase: i * 0.11,
-                                  dotShape: _dotShape,
-                                  motionMode: _motionMode,
-                                  cells: _cells,
-                                  showFace: _showFace,
-                                  sparkles: _sparkles,
-                                  onReplay: () => setState(() => _replayKey++),
-                                ),
-                            ],
-                          ),
-                          const SizedBox(height: 24),
-                          Center(
-                            child: Text(
-                              'Showing ${filtered.length} of ${animalSpecs.length} animals • Tap any animal to poke it!',
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.black45,
-                              ),
-                            ),
-                          ),
-                        ],
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'The Anatomy of\nAdaptation',
+                style: TextStyle(
+                    fontSize: 30, height: 1.1, fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(height: 8),
+              const Text('A visual study of how life evolves,\nadapts, and thrives.',
+                  style: TextStyle(fontSize: 13, color: Colors.grey)),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Signature moves'),
+                subtitle: const Text('Roar, spray, pounce... one special trick per animal'),
+                value: _signature,
+                onChanged: (v) => setState(() => _signature = v),
+              ),
+              SegmentedButton<DitherDot>(
+                showSelectedIcon: false,
+                segments: const [
+                  ButtonSegment(value: DitherDot.square, label: Text('Square')),
+                  ButtonSegment(value: DitherDot.round, label: Text('Round')),
+                  ButtonSegment(value: DitherDot.hex, label: Text('Hex')),
+                  ButtonSegment(value: DitherDot.diamond, label: Text('Diamond')),
+                ],
+                selected: {_dot},
+                onSelectionChanged: (v) => setState(() => _dot = v.first),
+              ),
+              const SizedBox(height: 8),
+              SegmentedButton<DitherColorMode>(
+                showSelectedIcon: false,
+                segments: const [
+                  ButtonSegment(value: DitherColorMode.solid, label: Text('Solid')),
+                  ButtonSegment(value: DitherColorMode.twoTone, label: Text('Two-tone')),
+                  ButtonSegment(value: DitherColorMode.gradient, label: Text('Gradient')),
+                ],
+                selected: {_mode},
+                onSelectionChanged: (v) => setState(() => _mode = v.first),
+              ),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Dark mode'),
+                value: _dark,
+                onChanged: (v) => setState(() => _dark = v),
+              ),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Auto mood (all animals)'),
+                subtitle: const Text('Facial expressions that change on their own'),
+                value: _autoMood,
+                onChanged: (v) => setState(() => _autoMood = v),
+              ),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Haptics'),
+                subtitle: const Text('Buzz on form, signature moves and taps'),
+                value: _haptics,
+                onChanged: (v) => setState(() => _haptics = v),
+              ),
+              const Text('Tap the tune icon on any card to open its full studio',
+                  style: TextStyle(fontSize: 12, color: Colors.black45)),
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 14,
+                runSpacing: 14,
+                children: [
+                  for (var i = 0; i < _specs.length; i++)
+                    GestureDetector(
+                      onLongPress: () => setState(() => _replay++),
+                      child: _AnimalCard(
+                        key: ValueKey('$i-$_replay'),
+                        spec: _specs[i],
+                        signature: _signature,
+                        dot: _dot,
+                        mode: _mode,
+                        dark: _dark,
+                        haptics: _haptics,
+                        autoMood: _autoMood,
+                        phase: i * 0.11,
                       ),
                     ),
-            ),
-          ],
+                ],
+              ),
+              const SizedBox(height: 12),
+              const Text('Tap an animal to poke it · long-press a card to replay',
+                  style: TextStyle(fontSize: 12, color: Colors.black45)),
+            ],
+          ),
         ),
       ),
-    );
-  }
-
-  Widget _buildControlsBar() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      color: Colors.white,
-      child: Column(
-        children: [
-          TextField(
-            decoration: InputDecoration(
-              isDense: true,
-              hintText: 'Search 30 animals (owl, lion, rocket, cupcake...)',
-              prefixIcon: const Icon(Icons.search, size: 20),
-              suffixIcon: _searchQuery.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(Icons.clear, size: 18),
-                      onPressed: () => setState(() => _searchQuery = ''),
-                    )
-                  : null,
-              contentPadding: const EdgeInsets.symmetric(vertical: 8),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.shade300),
-              ),
-              filled: true,
-              fillColor: const Color(0xFFF9FAFB),
-            ),
-            onChanged: (v) => setState(() => _searchQuery = v),
-          ),
-          const SizedBox(height: 8),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                SegmentedButton<DitherDot>(
-                  segments: const [
-                    ButtonSegment(
-                      value: DitherDot.square,
-                      label: Text('Square Dots', style: TextStyle(fontSize: 11)),
-                    ),
-                    ButtonSegment(
-                      value: DitherDot.round,
-                      label: Text('Round Dots', style: TextStyle(fontSize: 11)),
-                    ),
-                  ],
-                  selected: {_dotShape},
-                  onSelectionChanged: (s) => setState(() => _dotShape = s.first),
-                ),
-                const SizedBox(width: 8),
-                SegmentedButton<DitherMotion>(
-                  segments: const [
-                    ButtonSegment(
-                      value: DitherMotion.loop,
-                      label: Text('Loop', style: TextStyle(fontSize: 11)),
-                    ),
-                    ButtonSegment(
-                      value: DitherMotion.once,
-                      label: Text('Once', style: TextStyle(fontSize: 11)),
-                    ),
-                  ],
-                  selected: {_motionMode},
-                  onSelectionChanged: (s) =>
-                      setState(() => _motionMode = s.first),
-                ),
-                const SizedBox(width: 8),
-                FilterChip(
-                  label: const Text('Face', style: TextStyle(fontSize: 11)),
-                  selected: _showFace,
-                  onSelected: (v) => setState(() => _showFace = v),
-                ),
-                const SizedBox(width: 6),
-                FilterChip(
-                  label: const Text('Sparkles', style: TextStyle(fontSize: 11)),
-                  selected: _sparkles,
-                  onSelected: (v) => setState(() => _sparkles = v),
-                ),
-                const SizedBox(width: 8),
-                Text('Grid: ${_cells}x$_cells',
-                    style: const TextStyle(fontSize: 11, color: Colors.black54)),
-                SizedBox(
-                  width: 100,
-                  child: Slider(
-                    value: _cells.toDouble(),
-                    min: 48,
-                    max: 128,
-                    divisions: 5,
-                    onChanged: (v) => setState(() => _cells = v.round()),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+    ));
   }
 }
 
 class _AnimalCard extends StatelessWidget {
-  const _AnimalCard({
-    super.key,
-    required this.spec,
-    required this.phase,
-    required this.dotShape,
-    required this.motionMode,
-    required this.cells,
-    required this.showFace,
-    required this.sparkles,
-    required this.onReplay,
-  });
-
-  final AnimalSpec spec;
+  const _AnimalCard(
+      {super.key,
+      required this.spec,
+      required this.phase,
+      required this.signature,
+      required this.dot,
+      required this.mode,
+      required this.dark,
+      required this.haptics,
+      required this.autoMood});
+  final _Spec spec;
+  final bool signature;
+  final DitherDot dot;
+  final DitherColorMode mode;
+  final bool dark;
+  final bool haptics;
+  final bool autoMood;
   final double phase;
-  final DitherDot dotShape;
-  final DitherMotion motionMode;
-  final int cells;
-  final bool showFace;
-  final bool sparkles;
-  final VoidCallback onReplay;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 160,
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: dark ? const Color(0xFF151B2B) : Colors.white,
         borderRadius: BorderRadius.circular(18),
         boxShadow: const [
-          BoxShadow(
-            color: Color(0x10000000),
-            blurRadius: 14,
-            offset: Offset(0, 4),
-          ),
+          BoxShadow(color: Color(0x14000000), blurRadius: 16, offset: Offset(0, 6)),
         ],
       ),
       child: Column(
@@ -316,28 +237,32 @@ class _AnimalCard extends StatelessWidget {
             animal: spec.type,
             color: spec.color,
             phase: phase,
-            cells: cells,
-            dot: dotShape,
-            motion: motionMode,
-            showFace: showFace,
-            sparkles: sparkles,
-            pokeable: true,
-          ),
-          const SizedBox(height: 6),
-          Text(
-            spec.label,
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+            cells: 96,
+            signature: signature,
+            dot: dot,
+            theme: DitherTheme(
+              mode: mode,
+              secondary: const Color(0xFFFFB020),
+              brightness: dark ? Brightness.dark : Brightness.light,
             ),
+            hooks: haptics ? DitherHooks.haptics() : null,
+            autoMood: autoMood,
           ),
-          Text(
-            spec.personality,
-            style: const TextStyle(fontSize: 10, color: Colors.black45),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+          const SizedBox(height: 4),
+          Row(children: [
+            Expanded(
+              child: Text(spec.label,
+                  style: TextStyle(
+                      fontSize: 10, color: dark ? Colors.white60 : Colors.black45)),
+            ),
+            InkWell(
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) =>
+                      AnimalStudioPage(animal: spec.type, color: spec.color))),
+              child: Icon(Icons.tune,
+                  size: 18, color: dark ? Colors.white70 : Colors.black45),
+            ),
+          ]),
         ],
       ),
     );

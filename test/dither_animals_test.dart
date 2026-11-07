@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('DitherAnimalType & Art Specs', () {
-    test('contains 30 defined animals', () {
-      expect(DitherAnimalType.values.length, 30);
+    test('contains 50 defined animals', () {
+      expect(DitherAnimalType.values.length, 50);
     });
 
     test('every animal type has defined art with layers', () {

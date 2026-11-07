@@ -1,6 +1,6 @@
 # dither_animals
 
-[![pub package](https://img.shields.io/badge/pub-v1.0.2-blue.svg)](https://pub.dev/packages/dither_animals)
+[![pub package](https://img.shields.io/badge/pub-v2.0.0-blue.svg)](https://pub.dev/packages/dither_animals)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Flutter](https://img.shields.io/badge/Flutter-%3E%3D3.10.0-02569B?logo=flutter)](https://flutter.dev)
 [![GitHub](https://img.shields.io/badge/GitHub-ayan15888%2Fdither__animals-181717?logo=github)](https://github.com/ayan15888/dither_animals)
@@ -23,7 +23,7 @@ Rendered entirely on the Flutter `Canvas` using an **ordered 8×8 Bayer ditherin
 
 ## ✨ Features
 
-- 🐾 **30 Handcrafted Chibi Animals & Elements**: From owls, cats, and frogs to clouds, rockets, and cupcakes.
+- 🐾 **50 Handcrafted Chibi Animals & Elements**: From owls, cats, and frogs to whales, pandas, and flamingos.
 - 🎨 **Ordered Bayer 8×8 Matrix Dithering**: Authentic retro stipple rendering with smooth multi-layer density shading.
 - 🕹️ **Interactive Poke Shockwaves**: Tap any animal to send an interactive radial wave ripple through the stipple grid, accompanied by haptic click feedback.
 - 🔲 **Multiple Dot Styles**: Choose between crisp retro `DitherDot.square` pixels or organic halftone `DitherDot.round` circles.
