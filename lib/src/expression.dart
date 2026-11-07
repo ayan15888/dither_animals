@@ -131,7 +131,7 @@ DitherExpression? signatureMood(DitherAnimalType a, double u) {
   }
 }
 
-Color _alpha(Color c, double a) => c.withOpacity(a.clamp(0.0, 1.0).toDouble());
+Color _alpha(Color c, double a) => c.withValues(alpha: a.clamp(0.0, 1.0).toDouble());
 
 /// One expressive eye (replaces the round eye while an expression is active).
 void drawExprEye(Canvas c, Offset ctr, double r, ExprParams p, bool left,

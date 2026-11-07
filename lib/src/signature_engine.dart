@@ -264,7 +264,7 @@ void _specFx(Canvas c, SigCtx s, List<SigOp> ops) {
         // quick snap out to catch a fly, then reel back in
         final k = ph < 0.4 ? _sm(ph / 0.4) : 1 - _sm((ph - 0.4) / 0.35).clamp(0.0, 1.0).toDouble();
         final tip = anchor + Offset(extra * 0.8, -extra * 0.55) * k;
-        final pink = const Color(0xFFFF7FA6);
+        const pink = Color(0xFFFF7FA6);
         c.drawLine(anchor, tip, _sp(pink, 1.0, w: 2.2, fill: false));
         c.drawCircle(tip, 2.0, _sp(pink, 1.0));
         if (ph < 0.45) {

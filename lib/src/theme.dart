@@ -117,17 +117,17 @@ class DitherTheme {
       );
 
   @override
-  bool operator ==(Object o) =>
-      o is DitherTheme &&
-      o.mode == mode &&
-      o.primary == primary &&
-      o.secondary == secondary &&
-      o.gradientAngle == gradientAngle &&
-      o.gradientSteps == gradientSteps &&
-      o.twoToneMix == twoToneMix &&
-      mapEquals(o.parts, parts) &&
-      o.brightness == brightness &&
-      o.followSystem == followSystem;
+  bool operator ==(Object other) =>
+      other is DitherTheme &&
+      other.mode == mode &&
+      other.primary == primary &&
+      other.secondary == secondary &&
+      other.gradientAngle == gradientAngle &&
+      other.gradientSteps == gradientSteps &&
+      other.twoToneMix == twoToneMix &&
+      mapEquals(other.parts, parts) &&
+      other.brightness == brightness &&
+      other.followSystem == followSystem;
 
   @override
   int get hashCode => Object.hash(mode, primary, secondary, gradientAngle,

@@ -256,7 +256,7 @@ class _AnimalCard extends StatelessWidget {
                       fontSize: 10, color: dark ? Colors.white60 : Colors.black45)),
             ),
             InkWell(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
                   builder: (_) =>
                       AnimalStudioPage(animal: spec.type, color: spec.color))),
               child: Icon(Icons.tune,

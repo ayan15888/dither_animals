@@ -162,7 +162,6 @@ class _AnimalStudioPageState extends State<AnimalStudioPage> {
   Widget build(BuildContext context) {
     final bg = _dark ? const Color(0xFF0B0F1A) : const Color(0xFFE4E4E6);
     final card = _dark ? const Color(0xFF151B2B) : Colors.white;
-    final fg = _dark ? Colors.white : Colors.black87;
     return Theme(
       data: ThemeData(
           useMaterial3: true,

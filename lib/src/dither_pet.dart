@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'dither_animal.dart';
-import 'animal_shapes.dart';
-import 'theme.dart';
-import 'expression.dart';
 
 /// Dot style presets — simple names instead of [DitherDot] enum values.
 enum PetDot {

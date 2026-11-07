@@ -49,7 +49,7 @@ class Signature {
 }
 
 Paint _sp(Color c, double a, {double w = 1.2, bool fill = true}) => Paint()
-  ..color = c.withOpacity(_clamp01(a))
+  ..color = c.withValues(alpha: _clamp01(a))
   ..style = fill ? PaintingStyle.fill : PaintingStyle.stroke
   ..strokeWidth = w
   ..strokeCap = StrokeCap.round;

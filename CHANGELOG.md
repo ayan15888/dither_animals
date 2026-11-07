@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Standard Version](https://semver.org/) for commit guidelines.
 
+## 2.0.1
+
+- Cleaned up redundant imports, unused local variables, and deprecated API warnings across all codebase files.
+- Refined `screenshots` specification in `pubspec.yaml` to ensure pub.dev search and sidebar thumbnail generation.
+- Zero analysis issues on `dart analyze`.
+
 ## 2.0.0
 
 - Added `screenshots` metadata in `pubspec.yaml` to display preview thumbnails in pub.dev search results and the package right-hand sidebar.
