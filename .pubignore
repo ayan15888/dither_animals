@@ -1,0 +1,18 @@
+# Ignore website directory (hosted separately at ditherWebsite repository)
+website/
+
+# Ignore tool scripts
+tool/
+updated/
+migrate_working_dir/
+
+# OS and IDE files
+.DS_Store
+.idea/
+.vscode/
+*.iml
+
+# Build & test caches
+.dart_tool/
+.packages
+build/
