@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Standard Version](https://semver.org/) for commit guidelines.
 
+## 2.1.0
+
+- Added official live interactive web showcase & studio playground at [https://ditheranimals.vercel.app/](https://ditheranimals.vercel.app/).
+- Updated package homepage, documentation, and repository metadata in `pubspec.yaml` pointing to the live web application.
+- Added direct interactive showcase link and badges in README.
+- Verified 100% static analysis pass with `flutter analyze`.
+
 ## 2.0.2
 
 - Formatted all source files with `dart format`.

@@ -1,9 +1,14 @@
 # dither_animals
 
-[![pub package](https://img.shields.io/badge/pub-v2.0.2-blue.svg)](https://pub.dev/packages/dither_animals)
+[![pub package](https://img.shields.io/badge/pub-v2.1.0-blue.svg)](https://pub.dev/packages/dither_animals)
+[![Live Showcase](https://img.shields.io/badge/Live%20Showcase-ditheranimals.vercel.app-FF6B35.svg?style=flat&logo=vercel)](https://ditheranimals.vercel.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Flutter](https://img.shields.io/badge/Flutter-%3E%3D3.10.0-02569B?logo=flutter)](https://flutter.dev)
 [![GitHub](https://img.shields.io/badge/GitHub-ayan15888%2Fdither__animals-181717?logo=github)](https://github.com/ayan15888/dither_animals)
+
+> 🌐 **Live Interactive Web Showcase & Studio Playground:**  
+> Play with all 50 animated dither pets, customize Bayer matrix dot geometries, test poke ripple physics, tweak colors, and copy ready-to-use Flutter snippets directly in your browser:  
+> 👉 **[https://ditheranimals.vercel.app/](https://ditheranimals.vercel.app/)**
 
 Cute animated dithered (stipple, halftone, and ordered-dither) animal widgets for Flutter with **50 handcrafted chibi animals**, retro Bayer matrix rendering, signature moves, facial expressions, and ripple poke physics.
 
@@ -23,6 +28,7 @@ Rendered entirely on the Flutter `Canvas` using an **ordered 8×8 Bayer ditherin
 
 ## ✨ Features
 
+- 🌐 **Live Web Showcase & Studio**: Test all 50 pets, ordered Bayer dithering, and export Flutter code live at [ditheranimals.vercel.app](https://ditheranimals.vercel.app/).
 - 🐾 **50 Handcrafted Chibi Animals**: From owls, cats, and frogs to whales, pandas, and flamingos.
 - 🐶 **`DitherPet` Wrapper**: Ultra-clean, high-level API with one-line convenience constructors (`DitherPet.cat()`, `DitherPet.dog()`, etc.).
 - 🎨 **Ordered Bayer 8×8 Matrix Dithering**: Authentic retro stipple rendering with smooth multi-layer density shading.
@@ -42,7 +48,7 @@ Add `dither_animals` to your `pubspec.yaml` dependencies:
 
 ```yaml
 dependencies:
-  dither_animals: ^2.0.2
+  dither_animals: ^2.1.0
 ```
 
 Or run:
